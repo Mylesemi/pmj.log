@@ -8,14 +8,24 @@
   },
   "items": [
     {
-      "id": "taxis-2026",
+      "id": "taxis-web",
       "title": "TAXIS 2026 · 절세 시뮬레이터",
-      "description": "2026년 귀속 연말정산을 9단계로 따라가며 부부 합산 결정세액, 카드 배분, 예상 환급액을 계산하는 시뮬레이터예요.",
+      "description": "2026년 귀속 연말정산을 9단계로 따라가며 부부 합산 결정세액, 카드 배분, 예상 환급액을 계산하는 웹앱이에요.",
+      "category": "tool",
+      "tags": ["세금", "연말정산", "시뮬레이터", "React"],
+      "thumbnail": "thumbnails/taxis-web.png",
+      "url": "https://mylesemi.github.io/taxis/",
+      "repo": "https://github.com/Mylesemi/taxis",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "taxis-2026",
+      "title": "TAXIS 2026 v1.4 · 단일 HTML 버전",
+      "description": "파일 하나로 오프라인에서도 열리는 TAXIS 초기 버전이에요. 국세청 공개 예시로 환급액을 검산하는 기능이 들어 있어요.",
       "category": "tool",
       "tags": ["세금", "연말정산", "시뮬레이터"],
       "thumbnail": "thumbnails/taxis-2026.png",
       "url": "created_by_mj/TAXIS_2026_v1_4_공개사례_환급검산.html",
-      "repo": "https://github.com/Mylesemi/taxis",
       "date": "2026-10-23"
     },
     {
