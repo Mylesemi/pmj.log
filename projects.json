@@ -15,6 +15,16 @@
       "tags": ["세금", "연말정산", "시뮬레이터"],
       "thumbnail": "thumbnails/taxis-2026.png",
       "url": "created_by_mj/TAXIS_2026_v1_4_공개사례_환급검산.html",
+      "repo": "https://github.com/Mylesemi/taxis",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "dedu",
+      "title": "DEDU · 사진·영상 중복 정리",
+      "description": "PC 안의 같은 사진·영상을 찾아 비교하고, 선택한 파일만 휴지통으로 보내는 Windows 앱이에요. 디스크 용량을 폴더별로 보고 정리하는 기능도 있어요.",
+      "category": "tool",
+      "tags": ["Windows", "Python", "용량 정리"],
+      "url": "https://github.com/Mylesemi/dedu",
       "date": "2026-10-23"
     }
   ]
