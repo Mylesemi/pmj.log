@@ -20,12 +20,14 @@ OUT = pathlib.Path(__file__).resolve().parent.parent / "library.json"
 
 PROFILE = {
     "name": "책과 영화",
-    "tagline": "블로그 「막」에 남긴 독서·영화 기록",
+    "eyebrow": "PMJ.LOG · LIBRARY",
+    "headline": ["읽고 본 것들을,", "한 권씩 꽂아 둔 서재."],
+    "tagline": "블로그 「막」에 남긴 독서·영화 기록이에요. 표지에 마우스를 올리면 내용을 미리 볼 수 있어요.",
     "links": [{"label": "네이버 블로그", "url": f"https://blog.naver.com/{BLOG_ID}"}],
 }
 CATEGORY_DEFS = [
-    {"key": "book", "label": "책", "badge": "BOOK"},
-    {"key": "movie", "label": "영화", "badge": "MOVIE"},
+    {"key": "book", "label": "책", "badge": "BOOK", "unit": "권"},
+    {"key": "movie", "label": "영화", "badge": "MOVIE", "unit": "편"},
 ]
 
 

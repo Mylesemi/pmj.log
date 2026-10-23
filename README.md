@@ -28,9 +28,16 @@
 | `category` | ✅ | `tool` 또는 `material`(자료) |
 | `description`, `tags`, `date` | | 검색·필터·정렬에 사용. `date`는 `YYYY-MM-DD` |
 | `repo` | | 넣으면 "소스코드" 버튼 표시 |
-| `featured` | | `true`면 상단 "추천" 영역에 크게 표시 |
+| `featured` | | `true`면 목록 위 "추천" 영역에 따로 표시 |
 
-상단 프로필(이름, 소개, GitHub, 이메일, 추가 링크 `links: [{"label": "...", "url": "..."}]`)은 `profile`에서 수정합니다.
+상단 히어로 영역은 `profile`에서 수정합니다.
+
+| 필드 | 설명 |
+|---|---|
+| `eyebrow` | 제목 위 작은 영문 라벨 (예: `PMJ.LOG · TOOLS & NOTES`) |
+| `headline` | 큰 제목 2줄. 두 번째 줄은 강조색으로 표시 |
+| `tagline` | 오른쪽 소개 문장 |
+| `github`, `email`, `links` | 소개 아래 링크. `links: [{"label": "...", "url": "..."}]` |
 
 ## 책·영화 페이지 (`library.html`)
 
