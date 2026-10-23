@@ -41,6 +41,16 @@
       "date": "2026-10-23"
     },
     {
+      "id": "sigma",
+      "title": "SIGMA · 글로벌 시장 지표 대시보드",
+      "description": "환율, 원자재, 주가지수, 금리 같은 주요 시장 지표를 한 화면에서 보는 실시간 대시보드예요. 기간별 등락을 카드나 비교 그래프로 볼 수 있어요.",
+      "category": "tool",
+      "tags": ["투자", "대시보드", "Next.js"],
+      "url": "https://sigma-phi-eight.vercel.app/",
+      "repo": "https://github.com/Mylesemi/sigma",
+      "date": "2026-10-23"
+    },
+    {
       "id": "character-adv",
       "title": "글자 탐험대 · 5세 한글 모험 게임",
       "description": "토끼 토토와 함께 손글씨로 글자를 쓰며 이야기를 완성해 가는 아이용 터치 게임이에요. 한글과 ABC 모드, 기초 쓰기 놀이터가 있어요.",
