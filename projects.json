@@ -6,7 +6,7 @@
       "불편했던 순간마다,",
       "직접 만든 도구가 있습니다."
     ],
-    "tagline": "연말정산 계산부터 사진 정리, 가족 여행 지도까지. 일상과 업무에서 필요해서 만든 Tool과 HTML 자료를 모았어요.",
+    "tagline": "필요해서 직접 만든 도구, 그리고 만들며 참고한 사이트.",
     "github": "https://github.com/Mylesemi",
     "email": "",
     "links": []
@@ -15,7 +15,7 @@
     {
       "id": "taxis-web",
       "title": "TAXIS 2026 · 절세 시뮬레이터",
-      "description": "2026년 귀속 연말정산을 9단계로 따라가며 부부 합산 결정세액, 카드 배분, 예상 환급액을 계산하는 웹앱이에요.",
+      "description": "연말정산 9단계를 따라가며 부부 합산 절세액을 계산해요.",
       "category": "tool",
       "tags": [
         "세금",
@@ -33,7 +33,7 @@
     {
       "id": "taxis-2026",
       "title": "TAXIS 2026 v1.4 · 단일 HTML 버전",
-      "description": "파일 하나로 오프라인에서도 열리는 TAXIS 초기 버전이에요. 국세청 공개 예시로 환급액을 검산하는 기능이 들어 있어요.",
+      "description": "설치 없이 파일 하나로 여는 오프라인 TAXIS.",
       "category": "tool",
       "tags": [
         "세금",
@@ -49,7 +49,7 @@
     {
       "id": "storybeat",
       "title": "StoryGlow · 아이용 영어 그림책 따라 읽기",
-      "description": "읽어 주는 목소리에 맞춰 단어가 노래방처럼 하나씩 빛나는 영어 그림책이에요. 단어를 누르면 발음을 듣고, AI로 새 이야기를 만들 수도 있어요.",
+      "description": "읽는 소리에 맞춰 단어가 하나씩 빛나는 영어 그림책.",
       "category": "tool",
       "tags": [
         "영어",
@@ -66,7 +66,7 @@
     {
       "id": "sigma",
       "title": "SIGMA · 글로벌 시장 지표 대시보드",
-      "description": "환율, 원자재, 주가지수, 금리 같은 주요 시장 지표를 한 화면에서 보는 실시간 대시보드예요. 기간별 등락을 카드나 비교 그래프로 볼 수 있어요.",
+      "description": "환율·원자재·주가·금리를 한 화면에서.",
       "category": "tool",
       "tags": [
         "투자",
@@ -83,7 +83,7 @@
     {
       "id": "character-adv",
       "title": "글자 탐험대 · 5세 한글 모험 게임",
-      "description": "토끼 토토와 함께 손글씨로 글자를 쓰며 이야기를 완성해 가는 아이용 터치 게임이에요. 한글과 ABC 모드, 기초 쓰기 놀이터가 있어요.",
+      "description": "손글씨로 글자를 쓰며 이야기를 완성하는 한글 게임.",
       "category": "tool",
       "tags": [
         "한글",
@@ -100,7 +100,7 @@
     {
       "id": "fam",
       "title": "FAM · 우리 가족 탐험 지도",
-      "description": "가족이 다녀온 곳을 지도에 기록하고, 지역별 발자국과 탐험 도감으로 모아 보는 웹 서비스예요. 대한민국 지도와 세계지도를 오가며 볼 수 있어요.",
+      "description": "가족이 다녀온 곳을 지도 위 발자국으로 모아요.",
       "category": "tool",
       "tags": [
         "지도",
@@ -116,7 +116,7 @@
     {
       "id": "dedu",
       "title": "DEDU · 사진·영상 중복 정리",
-      "description": "PC 안의 같은 사진·영상을 찾아 비교하고, 선택한 파일만 휴지통으로 보내는 Windows 앱이에요. 디스크 용량을 폴더별로 보고 정리하는 기능도 있어요.",
+      "description": "중복 사진·영상을 찾아 휴지통으로. Windows용.",
       "category": "tool",
       "tags": [
         "Windows",
@@ -128,6 +128,59 @@
       "color": "#64748b",
       "icon": "images",
       "kind": "Windows 앱"
+    },
+    {
+      "id": "getdesign",
+      "title": "getdesign.md · AI 코딩용 디자인 시스템 모음",
+      "description": "유명 사이트의 디자인 시스템을 AI 에이전트용 DESIGN.md로.",
+      "category": "reference",
+      "tags": [
+        "디자인",
+        "AI 코딩"
+      ],
+      "url": "https://getdesign.md/",
+      "date": "2026-10-23",
+      "color": "#e11d48",
+      "icon": "palette",
+      "kind": "디자인 레퍼런스"
+    },
+    {
+      "id": "books-euiyun",
+      "title": "Books · 인터랙티브 교과서 시리즈",
+      "description": "시뮬레이터를 만지며 배우는 웹 교과서. 이 페이지 디자인의 원본.",
+      "category": "reference",
+      "tags": [
+        "교육",
+        "인터랙티브"
+      ],
+      "url": "https://books.euiyun.com/",
+      "date": "2026-10-23",
+      "color": "#b45309",
+      "icon": "library",
+      "kind": "인터랙티브 교과서"
+    }
+  ],
+  "categories": [
+    {
+      "key": "tool",
+      "label": "Tool",
+      "badge": "TOOL",
+      "unit": "개",
+      "description": "직접 만든 도구"
+    },
+    {
+      "key": "material",
+      "label": "자료",
+      "badge": "NOTE",
+      "unit": "개",
+      "description": "직접 만든 HTML 자료"
+    },
+    {
+      "key": "reference",
+      "label": "참고 사이트",
+      "badge": "PICK",
+      "unit": "곳",
+      "description": "curated by MJ"
     }
   ]
 }

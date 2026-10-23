@@ -183,6 +183,15 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 .group-head span { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .2em; color: var(--accent); }
 .group-head small { font-size: 13px; color: var(--text-3); }
 .group-head::after { content: ""; flex: 1; height: 1px; background: var(--border); align-self: center; }
+/* 카테고리 묶음: 큰 제목 + 개수 + 구분선 + 오른쪽 설명 */
+.group-head.is-category { margin-bottom: 18px; }
+.group-head.is-category span { font-family: inherit; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+.group-head.is-category em {
+  order: 3; font-style: normal; font-family: var(--mono); font-size: 12px; font-weight: 700;
+  letter-spacing: .08em; color: var(--accent); white-space: nowrap;
+}
+.group-head.is-category::after { order: 2; }
+.card[data-cat="reference"] { --c: var(--accent); }
 
 /* ---------- Cards (Tool·자료) ---------- */
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }

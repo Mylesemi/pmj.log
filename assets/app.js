@@ -4,6 +4,7 @@
   // 페이지마다 <body data-src="..." data-view="cards|shelf">로 데이터 파일과 보기 방식을 지정한다
   const DATA_SRC = document.body.dataset.src || 'projects.json';
   const VIEW = document.body.dataset.view === 'shelf' ? 'shelf' : 'cards';
+  const GROUP = document.body.dataset.group === 'category' ? 'category' : 'year';
   const DEFAULT_CATEGORIES = [
     { key: 'tool', label: 'Tool', badge: 'TOOL', unit: '개' },
     { key: 'material', label: '자료', badge: 'NOTE', unit: '개' },
@@ -35,6 +36,8 @@
     pencil: '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
     map: '<svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>',
     images: '<svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/><circle cx="8" cy="12" r="1.5"/><path d="m17 17-4-4-7 7"/></svg>',
+    palette: '<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg>',
+    library: '<svg viewBox="0 0 24 24"><path d="M4 4v16M8 4v16M12 6l4-1.5 4 15-4 1.5z"/><path d="M3 20h18"/></svg>',
   };
   // 표지 색상: id 해시로 고정 배정해 새로고침해도 같은 색이 나온다
   const COVER_COLORS = ['#4c46d6', '#13845b', '#d5501c', '#cf3271', '#0e7383', '#1f5fd1', '#9d2bb0', '#b7791f', '#0f766e', '#c2410c', '#5b3fc4', '#be2d4a'];
@@ -168,7 +171,8 @@
   const listClass = VIEW === 'shelf' ? 'shelf' : 'grid';
   const unitOf = (list) => {
     const units = new Set(list.map((i) => (CATEGORIES.find((c) => c.key === i.category) || {}).unit || '개'));
-    return units.size === 1 ? [...units][0] : '편';
+    if (units.size === 1) return [...units][0];
+    return VIEW === 'shelf' ? '편' : '개';
   };
 
   function filtered() {
@@ -182,8 +186,13 @@
         : (b.date || '').localeCompare(a.date || ''));
   }
 
-  // 최신순일 때는 연도별로 묶고, 그 외에는 한 묶음으로 보여준다
+  // data-group="category"면 카테고리 순서대로, 아니면 최신순일 때 연도별로 묶는다
   function groupItems(list) {
+    if (GROUP === 'category') {
+      return CATEGORIES.filter((c) => c.key !== 'all')
+        .map((c) => [c, list.filter((i) => i.category === c.key)])
+        .filter(([, group]) => group.length);
+    }
     if (state.sort !== 'date') return [[null, list]];
     const groups = new Map();
     list.forEach((i) => {
@@ -197,10 +206,13 @@
   function renderGrid() {
     const list = filtered();
     const groups = groupItems(list);
-    const showHeads = groups.length > 1;
-    $('#grid').innerHTML = groups.map(([year, group]) => `
+    const showHeads = GROUP === 'category' || groups.length > 1; // 카테고리 설명은 하나만 있어도 보여준다
+    const head = (key, group) => (typeof key === 'object' && key
+      ? `<h2 class="group-head is-category"><span>${esc(key.label)}</span><small>${group.length}${esc(key.unit || '개')}</small>${key.description ? `<em>${esc(key.description)}</em>` : ''}</h2>`
+      : `<h2 class="group-head"><span>${esc(key)}</span><small>${group.length}${esc(unitOf(group))}</small></h2>`);
+    $('#grid').innerHTML = groups.map(([key, group]) => `
       <section class="group">
-        ${showHeads ? `<h2 class="group-head"><span>${esc(year)}</span><small>${group.length}${esc(unitOf(group))}</small></h2>` : ''}
+        ${showHeads ? head(key, group) : ''}
         <div class="${listClass}">${group.map(itemHTML).join('')}</div>
       </section>`).join('');
     $('#empty').hidden = list.length > 0;
