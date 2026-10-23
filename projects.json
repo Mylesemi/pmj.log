@@ -1,0 +1,21 @@
+{
+  "profile": {
+    "name": "pmj.log",
+    "tagline": "직접 만든 Tool과 HTML 자료를 모아두는 곳",
+    "github": "https://github.com/Mylesemi",
+    "email": "",
+    "links": []
+  },
+  "items": [
+    {
+      "id": "taxis-2026",
+      "title": "TAXIS 2026 · 절세 시뮬레이터",
+      "description": "2026년 귀속 연말정산을 9단계로 따라가며 부부 합산 결정세액, 카드 배분, 예상 환급액을 계산하는 시뮬레이터예요.",
+      "category": "tool",
+      "tags": ["세금", "연말정산", "시뮬레이터"],
+      "thumbnail": "thumbnails/taxis-2026.png",
+      "url": "created_by_mj/TAXIS_2026_v1_4_공개사례_환급검산.html",
+      "date": "2026-10-23"
+    }
+  ]
+}
