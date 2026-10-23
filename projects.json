@@ -41,6 +41,15 @@
       "date": "2026-10-23"
     },
     {
+      "id": "character-adv",
+      "title": "글자 탐험대 · 5세 한글 모험 게임",
+      "description": "토끼 토토와 함께 손글씨로 글자를 쓰며 이야기를 완성해 가는 아이용 터치 게임이에요. 한글과 ABC 모드, 기초 쓰기 놀이터가 있어요.",
+      "category": "tool",
+      "tags": ["한글", "교육", "게임", "TypeScript"],
+      "url": "https://character-adv.vercel.app/",
+      "date": "2026-10-19"
+    },
+    {
       "id": "fam",
       "title": "FAM · 우리 가족 탐험 지도",
       "description": "가족이 다녀온 곳을 지도에 기록하고, 지역별 발자국과 탐험 도감으로 모아 보는 웹 서비스예요. 대한민국 지도와 세계지도를 오가며 볼 수 있어요.",
