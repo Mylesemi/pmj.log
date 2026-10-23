@@ -6,8 +6,7 @@
 ## 항목 추가하기
 
 1. **로컬 HTML 자료**는 `created_by_mj/` 폴더에 넣습니다. (파일이 쓰는 CSS/JS/이미지도 같은 폴더에)
-2. 카드 썸네일을 쓰려면 `thumbnails/<slug>.png`에 이미지를 넣습니다. (선택, 16:9 권장)
-3. `projects.json`의 `items`에 항목을 추가합니다.
+2. `projects.json`의 `items`에 항목을 추가합니다.
 
 ```json
 {
@@ -18,7 +17,6 @@
   "tags": ["AI", "자동화"],
   "url": "created_by_mj/my-tool.html",
   "repo": "https://github.com/USERNAME/my-tool",
-  "thumbnail": "thumbnails/my-tool.png",
   "date": "2026-10-23",
   "featured": false
 }
@@ -30,7 +28,6 @@
 | `category` | ✅ | `tool` 또는 `material`(자료) |
 | `description`, `tags`, `date` | | 검색·필터·정렬에 사용. `date`는 `YYYY-MM-DD` |
 | `repo` | | 넣으면 "소스코드" 버튼 표시 |
-| `thumbnail` | | 없으면 색상 + 첫 글자로 자동 생성 |
 | `featured` | | `true`면 상단 "추천" 영역에 크게 표시 |
 
 상단 프로필(이름, 소개, GitHub, 이메일, 추가 링크 `links: [{"label": "...", "url": "..."}]`)은 `profile`에서 수정합니다.
@@ -46,7 +43,6 @@ git add library.json && git commit -m "Update library" && git push
 ```
 
 - 카테고리 번호, 제외할 글(제목 앞부분)은 `tools/fetch_blog.py` 위쪽에서 바꿀 수 있어요.
-- 썸네일은 블로그 원본 이미지를 그대로 링크합니다. 이미지가 없는 글은 색상 + 첫 글자로 표시돼요.
 
 ## 로컬에서 미리보기
 

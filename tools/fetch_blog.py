@@ -57,8 +57,7 @@ def to_item(post, category):
     desc = " ".join(html.unescape(post.get("briefContents", "")).split())
     if len(desc) > DESC_LEN:
         desc = desc[:DESC_LEN].rstrip(" .…") + "…"
-    thumbs = post.get("thumbnailList") or []
-    item = {
+    return {
         "id": str(post["logNo"]),
         "title": html.unescape(post["titleWithInspectMessage"]).strip(),
         "description": desc,
@@ -66,9 +65,6 @@ def to_item(post, category):
         "url": f"https://blog.naver.com/{BLOG_ID}/{post['logNo']}",
         "date": datetime.datetime.fromtimestamp(post["addDate"] / 1000).strftime("%Y-%m-%d"),
     }
-    if thumbs and thumbs[0].get("encodedThumbnailUrl"):
-        item["thumbnail"] = thumbs[0]["encodedThumbnailUrl"] + "?type=w400"
-    return item
 
 
 def main():

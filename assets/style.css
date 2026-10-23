@@ -135,13 +135,8 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 .section-title { font-size: 14px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 12px; }
 .featured-section { margin-bottom: 32px; }
 .featured-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
-.card.is-featured { flex-direction: row; }
-.card.is-featured .thumb { width: 42%; aspect-ratio: auto; min-height: 180px; }
-.card.is-featured .card-title { font-size: 19px; }
-@media (max-width: 560px) {
-  .card.is-featured { flex-direction: column; }
-  .card.is-featured .thumb { width: 100%; aspect-ratio: 16 / 9; min-height: 0; }
-}
+.card.is-featured { padding: 24px; }
+.card.is-featured .card-title { font-size: 20px; }
 
 /* ---------- Toolbar ---------- */
 .toolbar {
@@ -187,42 +182,49 @@ select {
 .result-count { color: var(--text-3); font-size: 13px; margin: 16px 0 12px; }
 
 /* ---------- Cards ---------- */
-.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.groups { display: flex; flex-direction: column; gap: 40px; }
+.group-head {
+  display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px;
+  font-size: 24px; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+}
+.group-head small { font-size: 13px; font-weight: 500; color: var(--text-3); letter-spacing: 0; }
+.group-head::after { content: ""; flex: 1; height: 1px; background: var(--border); align-self: center; }
+
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 .card {
-  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  position: relative; display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+  padding: 18px 20px 20px;
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
   box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease, border-color .2s;
 }
-.card:hover, .card:focus-within { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-.card:focus-within { border-color: var(--accent); }
-
-.thumb { position: relative; aspect-ratio: 16 / 9; background: var(--surface-2); overflow: hidden; flex-shrink: 0; }
-.thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
-.card:hover .thumb img { transform: scale(1.03); }
-.thumb-placeholder {
-  position: absolute; inset: 0; display: grid; place-items: center;
-  font-size: 48px; font-weight: 800; letter-spacing: -0.04em; color: var(--c);
-  background:
-    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--c) 22%, transparent), transparent 55%),
-    radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--c) 16%, transparent), transparent 50%),
-    var(--c-soft);
+.card::before { /* 마우스를 올리면 카테고리 색 상단 라인 */
+  content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--c);
+  transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
 }
+.card:hover, .card:focus-within { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--c) 35%, var(--border)); }
+.card:hover::before, .card:focus-within::before { transform: scaleX(1); }
 .card[data-cat="tool"] { --c: var(--tool); --c-soft: var(--tool-soft); }
 .card[data-cat="material"] { --c: var(--material); --c-soft: var(--material-soft); }
 .card[data-cat="book"] { --c: var(--book); --c-soft: var(--book-soft); }
 .card[data-cat="movie"] { --c: var(--movie); --c-soft: var(--movie-soft); }
 
-.card-body { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px 18px; flex: 1; }
-.card-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-3); }
-.badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; letter-spacing: .02em;
+.card-top { display: flex; align-items: center; gap: 12px; }
+.card-icon {
+  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0;
   background: var(--c-soft); color: var(--c);
 }
-.card-meta .ext { margin-left: auto; display: inline-flex; align-items: center; gap: 3px; }
-.card-meta .ext svg { width: 13px; height: 13px; }
+.card-icon svg { width: 20px; height: 20px; }
+.card-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; font-size: 12px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 1px 7px; border-radius: 6px; font-weight: 700; font-size: 10.5px; letter-spacing: .04em;
+  background: var(--c-soft); color: var(--c);
+}
+.card-top .ext { margin-left: auto; align-self: flex-start; color: var(--text-3); transition: color .2s; }
+.card-top .ext svg { width: 16px; height: 16px; }
+.card:hover .ext { color: var(--c); }
 
-.card-title { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.4; }
+.card-title { margin: 2px 0 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.4; }
 .card-title a { text-decoration: none; }
 .card-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; } /* 카드 전체 클릭 */
 .card-title a:focus-visible { outline: none; }
@@ -230,19 +232,19 @@ select {
   margin: 0; color: var(--text-2); font-size: 14px;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
-.card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: auto; padding-top: 4px; }
+.card-foot { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 4px; }
+.card-tags { display: flex; gap: 4px 8px; flex-wrap: wrap; flex: 1; }
 .card-tags span { font-size: 12px; color: var(--text-3); }
 .card-tags span::before { content: "#"; }
 
-.card-actions { display: flex; gap: 6px; margin-top: 6px; }
 .btn {
   position: relative; z-index: 2;
-  display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 10px;
-  font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 10px;
+  font-size: 12.5px; font-weight: 600; text-decoration: none; cursor: pointer;
   border: 1px solid var(--border); background: var(--surface);
 }
 .btn:hover { border-color: var(--text-3); }
-.btn svg { width: 15px; height: 15px; }
+.btn svg { width: 14px; height: 14px; }
 
 /* ---------- Empty / Footer ---------- */
 .empty { text-align: center; padding: 64px 16px; color: var(--text-2); }

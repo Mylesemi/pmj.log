@@ -22,6 +22,12 @@
     mail: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
     link: '<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>',
   };
+  const CATEGORY_ICONS = {
+    tool: '<svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5a2.1 2.1 0 0 0 3 3l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.5-.5-.5-2.5z"/></svg>',
+    material: '<svg viewBox="0 0 24 24"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
+    book: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>',
+    movie: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 16.5h4M17 7.5h4M17 16.5h4M3 12h18"/></svg>',
+  };
 
   const $ = (sel) => document.querySelector(sel);
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -90,26 +96,35 @@
   function cardHTML(item, featured = false) {
     const ext = isExternal(item.url);
     const target = ext ? ' target="_blank" rel="noopener"' : ' target="_blank"';
-    const initial = esc((item.title || '?').trim().charAt(0).toUpperCase());
-    // placeholder를 항상 깔고, 썸네일이 있으면 위에 얹는다 (로드 실패 시 이미지만 제거)
-    const thumb = `<div class="thumb-placeholder" aria-hidden="true">${initial}</div>` +
-      (item.thumbnail ? `<img src="${esc(item.thumbnail)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '');
+    const icon = CATEGORY_ICONS[item.category] || CATEGORY_ICONS.tool;
     const date = item.date ? `<time datetime="${esc(item.date)}">${esc(item.date.replaceAll('-', '.'))}</time>` : '';
-    const extMark = ext ? `<span class="ext" title="외부 링크">${ICONS.ext}외부</span>` : '';
+    const extMark = ext ? `<span class="ext" title="외부 링크">${ICONS.ext}</span>` : '';
     const tags = (item.tags || []).map((t) => `<span>${esc(t)}</span>`).join('');
     const repo = item.repo ? `<a class="btn" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
 
     return `
       <article class="card${featured ? ' is-featured' : ''}" data-cat="${esc(item.category)}">
-        <div class="thumb">${thumb}</div>
-        <div class="card-body">
-          <div class="card-meta"><span class="badge">${CATEGORY_LABEL[item.category] || esc(item.category)}</span>${date}${extMark}</div>
-          <h3 class="card-title"><a href="${esc(item.url)}"${target}>${esc(item.title)}</a></h3>
-          ${item.description ? `<p class="card-desc">${esc(item.description)}</p>` : ''}
-          ${tags ? `<div class="card-tags">${tags}</div>` : ''}
-          ${repo ? `<div class="card-actions">${repo}</div>` : ''}
+        <div class="card-top">
+          <span class="card-icon" aria-hidden="true">${icon}</span>
+          <div class="card-meta"><span class="badge">${CATEGORY_LABEL[item.category] || esc(item.category)}</span>${date}</div>
+          ${extMark}
         </div>
+        <h3 class="card-title"><a href="${esc(item.url)}"${target}>${esc(item.title)}</a></h3>
+        ${item.description ? `<p class="card-desc">${esc(item.description)}</p>` : ''}
+        ${tags || repo ? `<div class="card-foot">${tags ? `<div class="card-tags">${tags}</div>` : ''}${repo}</div>` : ''}
       </article>`;
+  }
+
+  // 최신순일 때는 연도별로 묶고, 그 외에는 하나의 그리드로 보여준다
+  function groupItems(list) {
+    if (state.sort !== 'date') return [[null, list]];
+    const groups = new Map();
+    list.forEach((i) => {
+      const year = (i.date || '').slice(0, 4) || '날짜 없음';
+      if (!groups.has(year)) groups.set(year, []);
+      groups.get(year).push(i);
+    });
+    return [...groups];
   }
 
   function filtered() {
@@ -125,7 +140,13 @@
 
   function renderGrid() {
     const list = filtered();
-    $('#grid').innerHTML = list.map((i) => cardHTML(i)).join('');
+    const groups = groupItems(list);
+    const showHeads = groups.length > 1;
+    $('#grid').innerHTML = groups.map(([year, group]) => `
+      <section class="group">
+        ${showHeads ? `<h2 class="group-head">${esc(year)}<small>${group.length}개</small></h2>` : ''}
+        <div class="grid">${group.map((i) => cardHTML(i)).join('')}</div>
+      </section>`).join('');
     $('#empty').hidden = list.length > 0;
     $('#result-count').textContent = `${list.length}개 항목`;
   }
