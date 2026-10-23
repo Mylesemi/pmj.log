@@ -25,7 +25,10 @@
       ],
       "url": "https://mylesemi.github.io/taxis/",
       "repo": "https://github.com/Mylesemi/taxis",
-      "date": "2026-10-23"
+      "date": "2026-10-23",
+      "color": "#1d4ed8",
+      "icon": "calculator",
+      "kind": "웹앱"
     },
     {
       "id": "taxis-2026",
@@ -38,35 +41,61 @@
         "시뮬레이터"
       ],
       "url": "created_by_mj/TAXIS_2026_v1_4_공개사례_환급검산.html",
-      "date": "2026-10-23"
+      "date": "2026-10-23",
+      "color": "#0f766e",
+      "icon": "file-code",
+      "kind": "HTML 파일"
     },
     {
       "id": "storybeat",
       "title": "StoryGlow · 아이용 영어 그림책 따라 읽기",
       "description": "읽어 주는 목소리에 맞춰 단어가 노래방처럼 하나씩 빛나는 영어 그림책이에요. 단어를 누르면 발음을 듣고, AI로 새 이야기를 만들 수도 있어요.",
       "category": "tool",
-      "tags": ["영어", "교육", "AI", "TypeScript"],
+      "tags": [
+        "영어",
+        "교육",
+        "AI",
+        "TypeScript"
+      ],
       "url": "https://storybeat-beta.vercel.app/",
-      "date": "2026-10-23"
+      "date": "2026-10-23",
+      "color": "#d97706",
+      "icon": "book-open",
+      "kind": "웹앱"
     },
     {
       "id": "sigma",
       "title": "SIGMA · 글로벌 시장 지표 대시보드",
       "description": "환율, 원자재, 주가지수, 금리 같은 주요 시장 지표를 한 화면에서 보는 실시간 대시보드예요. 기간별 등락을 카드나 비교 그래프로 볼 수 있어요.",
       "category": "tool",
-      "tags": ["투자", "대시보드", "Next.js"],
+      "tags": [
+        "투자",
+        "대시보드",
+        "Next.js"
+      ],
       "url": "https://sigma-phi-eight.vercel.app/",
       "repo": "https://github.com/Mylesemi/sigma",
-      "date": "2026-10-23"
+      "date": "2026-10-23",
+      "color": "#7c3aed",
+      "icon": "chart",
+      "kind": "웹 대시보드"
     },
     {
       "id": "character-adv",
       "title": "글자 탐험대 · 5세 한글 모험 게임",
       "description": "토끼 토토와 함께 손글씨로 글자를 쓰며 이야기를 완성해 가는 아이용 터치 게임이에요. 한글과 ABC 모드, 기초 쓰기 놀이터가 있어요.",
       "category": "tool",
-      "tags": ["한글", "교육", "게임", "TypeScript"],
+      "tags": [
+        "한글",
+        "교육",
+        "게임",
+        "TypeScript"
+      ],
       "url": "https://character-adv.vercel.app/",
-      "date": "2026-10-19"
+      "date": "2026-10-19",
+      "color": "#db2777",
+      "icon": "pencil",
+      "kind": "웹 게임"
     },
     {
       "id": "fam",
@@ -79,7 +108,10 @@
         "TypeScript"
       ],
       "url": "https://fam-inky.vercel.app",
-      "date": "2026-10-20"
+      "date": "2026-10-20",
+      "color": "#16a34a",
+      "icon": "map",
+      "kind": "웹앱"
     },
     {
       "id": "dedu",
@@ -92,7 +124,10 @@
         "용량 정리"
       ],
       "url": "https://github.com/Mylesemi/dedu",
-      "date": "2026-10-23"
+      "date": "2026-10-23",
+      "color": "#64748b",
+      "icon": "images",
+      "kind": "Windows 앱"
     }
   ]
 }

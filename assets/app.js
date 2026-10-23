@@ -26,6 +26,16 @@
     book: '<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>',
     movie: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 16.5h4M17 7.5h4M17 16.5h4M3 12h18"/></svg>',
   };
+  // projects.json 항목의 "icon" 값으로 고르는 아이콘
+  const ITEM_ICONS = {
+    calculator: '<svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h4"/></svg>',
+    'file-code': '<svg viewBox="0 0 24 24"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M10 12l-2 2 2 2M14 12l2 2-2 2"/></svg>',
+    'book-open': '<svg viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></svg>',
+    chart: '<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-6"/><path d="M16 8h4v4"/></svg>',
+    pencil: '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+    map: '<svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>',
+    images: '<svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/><circle cx="8" cy="12" r="1.5"/><path d="m17 17-4-4-7 7"/></svg>',
+  };
   // 표지 색상: id 해시로 고정 배정해 새로고침해도 같은 색이 나온다
   const COVER_COLORS = ['#4c46d6', '#13845b', '#d5501c', '#cf3271', '#0e7383', '#1f5fd1', '#9d2bb0', '#b7791f', '#0f766e', '#c2410c', '#5b3fc4', '#be2d4a'];
 
@@ -130,14 +140,19 @@
 
   function cardHTML(item) {
     const kind = CATEGORY_LABEL[item.category] || item.category;
+    const icon = ITEM_ICONS[item.icon] || CATEGORY_ICONS[item.category] || CATEGORY_ICONS.tool;
+    // 항목별 color가 있으면 그 색으로, 없으면 카테고리 색으로 카드를 칠한다
+    const color = /^#[0-9a-f]{3,8}$/i.test(item.color || '') ? ` style="--c:${item.color}"` : '';
     const tags = (item.tags || []).map((t) => `<span>#${esc(t)}</span>`).join('');
     const repo = item.repo ? `<a class="card-link sub" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
     return `
-      <article class="card" data-cat="${esc(item.category)}">
+      <article class="card" data-cat="${esc(item.category)}"${color}>
         <div class="card-head">
-          <span class="card-icon" aria-hidden="true">${CATEGORY_ICONS[item.category] || CATEGORY_ICONS.tool}</span>
-          <span class="card-kicker">${esc(kind)}</span>
-          <time class="card-date" datetime="${esc(item.date || '')}">${esc((item.date || '').replaceAll('-', '.'))}</time>
+          <span class="card-tile" aria-hidden="true">${icon}</span>
+          <span class="card-head-text">
+            <span class="card-kicker">${esc(kind)}${item.kind ? `<i>·</i>${esc(item.kind)}` : ''}</span>
+            <time class="card-date" datetime="${esc(item.date || '')}">${esc((item.date || '').replaceAll('-', '.'))}</time>
+          </span>
         </div>
         <h3 class="card-title"><a href="${esc(item.url)}"${linkAttrs(item.url)}>${esc(item.title)}</a></h3>
         ${item.description ? `<p class="card-desc">${esc(item.description)}</p>` : ''}

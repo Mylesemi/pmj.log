@@ -28,6 +28,9 @@
 | `category` | ✅ | `tool` 또는 `material`(자료) |
 | `description`, `tags`, `date` | | 검색·필터·정렬에 사용. `date`는 `YYYY-MM-DD` |
 | `repo` | | 넣으면 "소스코드" 버튼 표시 |
+| `color` | | 카드 고유 색 (예: `"#1d4ed8"`). 없으면 카테고리 색 |
+| `icon` | | 카드 아이콘: `calculator`, `file-code`, `book-open`, `chart`, `pencil`, `map`, `images` |
+| `kind` | | 라벨 옆 종류 표시 (예: `웹앱`, `Windows 앱`, `HTML 파일`) |
 | `featured` | | `true`면 목록 위 "추천" 영역에 따로 표시 |
 
 상단 히어로 영역은 `profile`에서 수정합니다.

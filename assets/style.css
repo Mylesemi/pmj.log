@@ -187,22 +187,35 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 /* ---------- Cards (Tool·자료) ---------- */
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
 .card {
-  position: relative; display: flex; flex-direction: column; gap: 10px;
-  padding: 22px 22px 20px;
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  /* --c: 항목 고유 색. --c-ink: 글자용으로 배경과 대비를 맞춘 같은 계열 색 */
+  --c-ink: color-mix(in srgb, var(--c) 78%, var(--text));
+  position: relative; display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+  padding: 24px 22px 20px;
+  background:
+    radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--c) 11%, transparent), transparent 60%),
+    var(--surface);
+  border: 1px solid var(--border); border-top: 4px solid var(--c); border-radius: var(--radius);
   box-shadow: var(--shadow); transition: transform .2s ease, box-shadow .2s ease, border-color .2s;
 }
-.card:hover, .card:focus-within { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: color-mix(in srgb, var(--c) 40%, var(--border)); }
+.card:hover, .card:focus-within {
+  transform: translateY(-3px); border-color: color-mix(in srgb, var(--c) 45%, var(--border)); border-top-color: var(--c);
+  box-shadow: var(--shadow-hover), 0 10px 28px -12px color-mix(in srgb, var(--c) 45%, transparent);
+}
 .card[data-cat="tool"] { --c: var(--tool); }
 .card[data-cat="material"] { --c: var(--material); }
-.card-head { display: flex; align-items: center; gap: 10px; }
-.card-icon {
-  width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; flex-shrink: 0;
-  color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent);
+.card-head { display: flex; align-items: center; gap: 14px; }
+.card-tile {
+  width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; flex-shrink: 0; color: #fff;
+  background: linear-gradient(140deg, color-mix(in srgb, var(--c) 82%, #fff), var(--c) 55%, color-mix(in srgb, var(--c) 75%, #000));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 8px 18px -8px color-mix(in srgb, var(--c) 70%, transparent);
+  transition: transform .25s ease;
 }
-.card-icon svg { width: 17px; height: 17px; }
-.card-kicker { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; color: var(--c); }
-.card-date { margin-left: auto; font-family: var(--mono); font-size: 11.5px; color: var(--text-3); }
+.card:hover .card-tile { transform: rotate(-6deg) scale(1.05); }
+.card-tile svg { width: 25px; height: 25px; stroke-width: 1.8; }
+.card-head-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.card-kicker { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; color: var(--c-ink); }
+.card-kicker i { font-style: normal; margin: 0 6px; opacity: .5; }
+.card-date { font-family: var(--mono); font-size: 11.5px; color: var(--text-3); }
 .card-title { margin: 6px 0 0; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; }
 .card-title a { text-decoration: none; }
 .card-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; } /* 카드 전체 클릭 */
@@ -210,7 +223,7 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 .card-desc { margin: 0; color: var(--text-2); font-size: 14px; line-height: 1.65; }
 .card-tags { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--text-3); }
 .card-foot { display: flex; align-items: center; gap: 16px; margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border); }
-.card-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 700; color: var(--c); text-decoration: none; }
+.card-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 700; color: var(--c-ink); text-decoration: none; }
 .card-link svg { width: 15px; height: 15px; transition: transform .2s; }
 .card:hover .card-link:not(.sub) svg { transform: translate(2px, -2px); }
 .card-link.sub { position: relative; z-index: 2; color: var(--text-2); font-weight: 600; }
