@@ -1,12 +1,18 @@
 (() => {
   'use strict';
 
-  const CATEGORIES = [
-    { key: 'all', label: '전체' },
-    { key: 'tool', label: 'Tool' },
-    { key: 'material', label: '자료' },
+  // 페이지마다 <body data-src="...">로 데이터 파일을 지정하고, 카테고리는 JSON의 categories로 덮어쓸 수 있다
+  const DATA_SRC = document.body.dataset.src || 'projects.json';
+  const DEFAULT_CATEGORIES = [
+    { key: 'tool', label: 'Tool', badge: 'TOOL' },
+    { key: 'material', label: '자료', badge: '자료' },
   ];
-  const CATEGORY_LABEL = { tool: 'TOOL', material: '자료' };
+  let CATEGORIES = [];
+  let CATEGORY_LABEL = {};
+  function setCategories(list) {
+    CATEGORIES = [{ key: 'all', label: '전체' }, ...list];
+    CATEGORY_LABEL = Object.fromEntries(list.map((c) => [c.key, c.badge || c.label]));
+  }
 
   const ICONS = {
     open: '<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
@@ -58,9 +64,8 @@
 
   function renderStats() {
     const n = (cat) => items.filter((i) => i.category === cat).length;
-    $('#stats').innerHTML =
-      `<div class="stat"><b>${n('tool')}</b><span>Tool</span></div>` +
-      `<div class="stat"><b>${n('material')}</b><span>자료</span></div>`;
+    $('#stats').innerHTML = CATEGORIES.filter((c) => c.key !== 'all')
+      .map((c) => `<div class="stat"><b>${n(c.key)}</b><span>${esc(c.label)}</span></div>`).join('');
   }
 
   function renderTabs() {
@@ -88,7 +93,7 @@
     const initial = esc((item.title || '?').trim().charAt(0).toUpperCase());
     // placeholder를 항상 깔고, 썸네일이 있으면 위에 얹는다 (로드 실패 시 이미지만 제거)
     const thumb = `<div class="thumb-placeholder" aria-hidden="true">${initial}</div>` +
-      (item.thumbnail ? `<img src="${esc(item.thumbnail)}" alt="" loading="lazy" onerror="this.remove()">` : '');
+      (item.thumbnail ? `<img src="${esc(item.thumbnail)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '');
     const date = item.date ? `<time datetime="${esc(item.date)}">${esc(item.date.replaceAll('-', '.'))}</time>` : '';
     const extMark = ext ? `<span class="ext" title="외부 링크">${ICONS.ext}외부</span>` : '';
     const tags = (item.tags || []).map((t) => `<span>${esc(t)}</span>`).join('');
@@ -181,15 +186,16 @@
   async function init() {
     bindEvents();
     try {
-      const res = await fetch('projects.json', { cache: 'no-cache' });
+      const res = await fetch(DATA_SRC, { cache: 'no-cache' });
       if (!res.ok) throw new Error(res.status);
       const data = await res.json();
+      setCategories(Array.isArray(data.categories) && data.categories.length ? data.categories : DEFAULT_CATEGORIES);
       items = (data.items || []).filter((i) => i && i.title && i.url);
       renderProfile(data.profile);
       const updated = items.map((i) => i.date || '').sort().pop();
       if (updated) $('#updated').textContent = `마지막 업데이트 ${updated.replaceAll('-', '.')}`;
     } catch (err) {
-      $('#grid').innerHTML = `<p class="empty">projects.json을 불러오지 못했어요. 로컬에서는 <code>python -m http.server</code>로 서버를 띄워 열어주세요.</p>`;
+      $('#grid').innerHTML = `<p class="empty">${esc(DATA_SRC)}을 불러오지 못했어요. 로컬에서는 <code>python -m http.server</code>로 서버를 띄워 열어주세요.</p>`;
       console.error(err);
       return;
     }

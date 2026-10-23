@@ -35,6 +35,19 @@
 
 상단 프로필(이름, 소개, GitHub, 이메일, 추가 링크 `links: [{"label": "...", "url": "..."}]`)은 `profile`에서 수정합니다.
 
+## 책·영화 페이지 (`library.html`)
+
+네이버 블로그(semimirr)의 **취향 독서**·**취향 영화** 카테고리 글을 모아 보여줍니다.
+새 글을 쓴 뒤 아래 명령으로 `library.json`을 다시 만들고 push하면 반영돼요.
+
+```bash
+python tools/fetch_blog.py
+git add library.json && git commit -m "Update library" && git push
+```
+
+- 카테고리 번호, 제외할 글(제목 앞부분)은 `tools/fetch_blog.py` 위쪽에서 바꿀 수 있어요.
+- 썸네일은 블로그 원본 이미지를 그대로 링크합니다. 이미지가 없는 글은 색상 + 첫 글자로 표시돼요.
+
 ## 로컬에서 미리보기
 
 `projects.json`을 fetch하므로 파일을 직접 열지 말고 서버로 띄워주세요.

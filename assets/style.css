@@ -13,6 +13,10 @@
   --tool-soft: #eef0ff;
   --material: #0d9488;
   --material-soft: #e6f6f4;
+  --book: #b45309;
+  --book-soft: #fdf3e4;
+  --movie: #be185d;
+  --movie-soft: #fdecf3;
   --shadow: 0 1px 2px rgb(16 17 26 / 4%), 0 4px 16px rgb(16 17 26 / 6%);
   --shadow-hover: 0 2px 4px rgb(16 17 26 / 6%), 0 12px 32px rgb(16 17 26 / 12%);
   --radius: 16px;
@@ -34,6 +38,10 @@
     --tool-soft: #24234a;
     --material: #2dd4bf;
     --material-soft: #12312e;
+    --book: #fbbf24;
+    --book-soft: #3a2a10;
+    --movie: #f472b6;
+    --movie-soft: #3d1528;
     --shadow: 0 1px 2px rgb(0 0 0 / 30%);
     --shadow-hover: 0 12px 32px rgb(0 0 0 / 45%);
     color-scheme: dark;
@@ -53,6 +61,10 @@
   --tool-soft: #24234a;
   --material: #2dd4bf;
   --material-soft: #12312e;
+  --book: #fbbf24;
+  --book-soft: #3a2a10;
+  --movie: #f472b6;
+  --movie-soft: #3d1528;
   --shadow: 0 1px 2px rgb(0 0 0 / 30%);
   --shadow-hover: 0 12px 32px rgb(0 0 0 / 45%);
   color-scheme: dark;
@@ -79,6 +91,14 @@ svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width:
 @media (min-width: 720px) { .container { padding: 0 32px; } }
 
 /* ---------- Header ---------- */
+.site-nav { display: flex; gap: 4px; margin-bottom: 28px; }
+.site-nav a {
+  padding: 6px 12px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  text-decoration: none; color: var(--text-3);
+}
+.site-nav a:hover { color: var(--text); }
+.site-nav a[aria-current="page"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.page-library .card-desc { -webkit-line-clamp: 3; }
 .site-header { padding: 56px 0 32px; }
 .header-inner { display: flex; gap: 24px; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; }
 .brand h1 { margin: 0; font-size: clamp(28px, 5vw, 40px); font-weight: 800; letter-spacing: -0.03em; }
@@ -189,6 +209,8 @@ select {
 }
 .card[data-cat="tool"] { --c: var(--tool); --c-soft: var(--tool-soft); }
 .card[data-cat="material"] { --c: var(--material); --c-soft: var(--material-soft); }
+.card[data-cat="book"] { --c: var(--book); --c-soft: var(--book-soft); }
+.card[data-cat="movie"] { --c: var(--movie); --c-soft: var(--movie-soft); }
 
 .card-body { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px 18px; flex: 1; }
 .card-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-3); }
