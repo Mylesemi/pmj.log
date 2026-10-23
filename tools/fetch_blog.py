@@ -6,6 +6,7 @@ import datetime
 import html
 import json
 import pathlib
+import re
 import urllib.request
 
 BLOG_ID = "semimirr"
@@ -15,8 +16,11 @@ CATEGORIES = [  # (블로그 카테고리 번호, library.json의 category 키)
 ]
 # 리뷰가 아닌 글(퍼온 글, 블로그 챌린지 등)은 제목 앞부분으로 제외
 EXCLUDE_PREFIXES = ("[공유]", "[20.Blog]", "[2022 마이 블로그 리포트]")
-DESC_LEN = 140
+DESC_LEN = 60
 OUT = pathlib.Path(__file__).resolve().parent.parent / "library.json"
+# 글별 한 줄 요약 (logNo → 문장). 없는 글은 본문 첫 문장을 쓴다
+NOTES_FILE = pathlib.Path(__file__).resolve().parent / "library_notes.json"
+NOTES = json.loads(NOTES_FILE.read_text(encoding="utf-8")) if NOTES_FILE.exists() else {}
 
 PROFILE = {
     "name": "책과 영화",
@@ -55,10 +59,15 @@ def fetch_category(category_no):
     return list(items.values())
 
 
+def first_sentence(text):
+    text = " ".join(html.unescape(text).split())
+    m = re.search(r"^.{8,}?[.?!](?=\s|$)", text)
+    desc = m.group(0) if m else text
+    return desc if len(desc) <= DESC_LEN else desc[:DESC_LEN].rstrip(" .…") + "…"
+
+
 def to_item(post, category):
-    desc = " ".join(html.unescape(post.get("briefContents", "")).split())
-    if len(desc) > DESC_LEN:
-        desc = desc[:DESC_LEN].rstrip(" .…") + "…"
+    desc = NOTES.get(str(post["logNo"])) or first_sentence(post.get("briefContents", ""))
     return {
         "id": str(post["logNo"]),
         "title": html.unescape(post["titleWithInspectMessage"]).strip(),

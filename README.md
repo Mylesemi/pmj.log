@@ -53,6 +53,7 @@ git add library.json && git commit -m "Update library" && git push
 ```
 
 - 카테고리 번호, 제외할 글(제목 앞부분)은 `tools/fetch_blog.py` 위쪽에서 바꿀 수 있어요.
+- 표지 뒷면의 한 줄 요약은 `tools/library_notes.json`(글 번호 → 문장)에서 고쳐요. 없는 글은 본문 첫 문장이 자동으로 들어가요.
 
 ## 로컬에서 미리보기
 
