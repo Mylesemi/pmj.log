@@ -26,7 +26,7 @@ PROFILE = {
     "name": "책과 영화",
     "eyebrow": "PMJ.LOG · LIBRARY",
     "headline": ["읽고 본 것들을,", "한 권씩 꽂아 둔 서재."],
-    "tagline": "블로그 「막」에 남긴 독서·영화 기록. 표지에 올리면 요약이 보여요.",
+    "tagline": "블로그 「막」에 남긴 독서·영화 기록. 표지에 마우스를 올리거나 한 번 누르면 한 줄 요약이 보여요.",
     "links": [{"label": "네이버 블로그", "url": f"https://blog.naver.com/{BLOG_ID}"}],
 }
 CATEGORY_DEFS = [

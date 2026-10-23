@@ -38,6 +38,9 @@
     images: '<svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/><circle cx="8" cy="12" r="1.5"/><path d="m17 17-4-4-7 7"/></svg>',
     palette: '<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .8-1.8 1.8-1.8H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg>',
     library: '<svg viewBox="0 0 24 24"><path d="M4 4v16M8 4v16M12 6l4-1.5 4 15-4 1.5z"/><path d="M3 20h18"/></svg>',
+    gamepad: '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 10.5v4M5 12.5h4"/><circle cx="15.5" cy="11.5" r="1"/><circle cx="18" cy="14" r="1"/></svg>',
+    building: '<svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V9l5-3v15M10 21V4l9 4v13"/><path d="M13 10h2M13 14h2M13 18h2"/></svg>',
+    users: '<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.5a6.5 6.5 0 0 1 3 5.5"/></svg>',
   };
   // 표지 색상: id 해시로 고정 배정해 새로고침해도 같은 색이 나온다
   const COVER_COLORS = ['#4c46d6', '#13845b', '#d5501c', '#cf3271', '#0e7383', '#1f5fd1', '#9d2bb0', '#b7791f', '#0f766e', '#c2410c', '#5b3fc4', '#be2d4a'];
@@ -148,6 +151,8 @@
     const color = /^#[0-9a-f]{3,8}$/i.test(item.color || '') ? ` style="--c:${item.color}"` : '';
     const tags = (item.tags || []).map((t) => `<span>#${esc(t)}</span>`).join('');
     const repo = item.repo ? `<a class="card-link sub" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
+    // 추가 링크 (예: 오프라인 버전, 다운로드)
+    const extra = (item.links || []).map((l) => `<a class="card-link sub" href="${esc(l.url)}"${linkAttrs(l.url)}>${esc(l.label)}${ICONS.arrow}</a>`).join('');
     return `
       <article class="card" data-cat="${esc(item.category)}"${color}>
         <div class="card-head">
@@ -162,7 +167,7 @@
         ${tags ? `<div class="card-tags">${tags}</div>` : ''}
         <div class="card-foot">
           <span class="card-link">열기${ICONS.arrow}</span>
-          ${repo}
+          ${extra}${repo}
         </div>
       </article>`;
   }
@@ -256,6 +261,17 @@
       update();
     });
     window.addEventListener('hashchange', () => { readHash(); update(); });
+
+    // 터치 기기: 첫 탭은 표지를 뒤집어 요약을 보여주고, 두 번째 탭에 원문으로 이동
+    if (VIEW === 'shelf') {
+      $('#grid').addEventListener('click', (e) => {
+        const cover = e.target.closest('.cover');
+        if (!cover || !matchMedia('(hover: none)').matches || cover.classList.contains('is-flipped')) return;
+        e.preventDefault();
+        document.querySelectorAll('.cover.is-flipped').forEach((c) => c.classList.remove('is-flipped'));
+        cover.classList.add('is-flipped');
+      });
+    }
 
     $('#theme-toggle').addEventListener('click', () => {
       const root = document.documentElement;

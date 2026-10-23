@@ -231,7 +231,7 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 .card-title a:focus-visible { outline: none; }
 .card-desc { margin: 0; color: var(--text-2); font-size: 14px; line-height: 1.65; }
 .card-tags { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--text-3); }
-.card-foot { display: flex; align-items: center; gap: 16px; margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border); }
+.card-foot { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border); }
 .card-link { display: inline-flex; align-items: center; gap: 4px; font-size: 13.5px; font-weight: 700; color: var(--c-ink); text-decoration: none; }
 .card-link svg { width: 15px; height: 15px; transition: transform .2s; }
 .card:hover .card-link:not(.sub) svg { transform: translate(2px, -2px); }
@@ -297,7 +297,9 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 .cover-back-desc { font-size: 11.5px; line-height: 1.55; color: #c9c0b4; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
 .cover-back-cta { margin-top: auto; display: inline-flex; align-items: center; gap: 3px; font-size: 12px; font-weight: 700; color: #f5b971; }
 .cover-back-cta svg { width: 13px; height: 13px; }
-@media (hover: none) { .cover-back { display: none; } }
+/* 터치 기기: 첫 탭으로 뒤집힌 표지 (app.js가 .is-flipped를 붙인다) */
+.cover.is-flipped { transform: translateY(-6px); }
+.cover.is-flipped .cover-back { opacity: 1; }
 
 /* ---------- Misc ---------- */
 .btn {

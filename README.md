@@ -25,12 +25,13 @@
 | 필드 | 필수 | 설명 |
 |---|---|---|
 | `title`, `url` | ✅ | 없으면 표시되지 않음. `url`은 상대경로(로컬) 또는 `https://...`(외부) |
-| `category` | ✅ | `tool` 또는 `material`(자료) |
+| `category` | ✅ | `tool` 또는 `reference`(참고 사이트) |
 | `description`, `tags`, `date` | | 검색·필터·정렬에 사용. `date`는 `YYYY-MM-DD` |
 | `repo` | | 넣으면 "소스코드" 버튼 표시 |
 | `color` | | 카드 고유 색 (예: `"#1d4ed8"`). 없으면 카테고리 색 |
 | `icon` | | 카드 아이콘: `calculator`, `file-code`, `book-open`, `chart`, `pencil`, `map`, `images` |
 | `kind` | | 라벨 옆 종류 표시 (예: `웹앱`, `Windows 앱`, `HTML 파일`) |
+| `links` | | 추가 버튼 `[{"label": "오프라인 HTML", "url": "..."}]` |
 | `featured` | | `true`면 목록 위 "추천" 영역에 따로 표시 |
 
 상단 히어로 영역은 `profile`에서 수정합니다.
@@ -45,7 +46,8 @@
 ## 책·영화 페이지 (`library.html`)
 
 네이버 블로그(semimirr)의 **취향 독서**·**취향 영화** 카테고리 글을 모아 보여줍니다.
-새 글을 쓴 뒤 아래 명령으로 `library.json`을 다시 만들고 push하면 반영돼요.
+GitHub Actions(`.github/workflows/update-library.yml`)가 **매일 아침 6시**에 블로그를 확인해 자동으로 갱신해요.
+바로 반영하고 싶으면 저장소 Actions 탭에서 "Update library"를 **Run workflow** 하거나, 아래 명령을 직접 실행하세요.
 
 ```bash
 python tools/fetch_blog.py

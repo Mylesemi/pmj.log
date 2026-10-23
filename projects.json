@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "pmj.log",
-    "eyebrow": "PMJ.LOG · TOOLS & NOTES",
+    "eyebrow": "PMJ.LOG · BUILD & SHARE",
     "headline": [
       "함께 만들고",
       "나누는 지식"
@@ -28,23 +28,13 @@
       "date": "2026-10-23",
       "color": "#1d4ed8",
       "icon": "calculator",
-      "kind": "웹앱"
-    },
-    {
-      "id": "taxis-2026",
-      "title": "TAXIS 2026 v1.4 · 단일 HTML 버전",
-      "description": "설치 없이 파일 하나로 여는 오프라인 TAXIS.",
-      "category": "tool",
-      "tags": [
-        "세금",
-        "연말정산",
-        "시뮬레이터"
-      ],
-      "url": "created_by_mj/TAXIS_2026_v1_4_공개사례_환급검산.html",
-      "date": "2026-10-23",
-      "color": "#0f766e",
-      "icon": "file-code",
-      "kind": "HTML 파일"
+      "kind": "웹앱",
+      "links": [
+        {
+          "label": "오프라인 HTML",
+          "url": "created_by_mj/TAXIS_2026_v1_4_공개사례_환급검산.html"
+        }
+      ]
     },
     {
       "id": "storybeat",
@@ -130,6 +120,54 @@
       "kind": "Windows 앱"
     },
     {
+      "id": "dodgepoop",
+      "title": "똥피하기 · 실시간 아케이드 게임",
+      "description": "떨어지는 똥을 피해 끝까지 살아남기. 최대 6인 실시간 대결.",
+      "category": "tool",
+      "tags": [
+        "게임",
+        "멀티플레이",
+        "TypeScript"
+      ],
+      "url": "https://dodgepoop.vercel.app/",
+      "date": "2026-10-17",
+      "color": "#ca8a04",
+      "icon": "gamepad",
+      "kind": "웹 게임"
+    },
+    {
+      "id": "udongjeon",
+      "title": "우동전 · 우리 동네 전쟁",
+      "description": "가장 살기 좋은 동네를 만드는 2~4인 도시개발 보드게임.",
+      "category": "tool",
+      "tags": [
+        "게임",
+        "보드게임",
+        "TypeScript"
+      ],
+      "url": "https://udongjeon.vercel.app/",
+      "date": "2026-10-07",
+      "color": "#0891b2",
+      "icon": "building",
+      "kind": "보드게임"
+    },
+    {
+      "id": "6cc",
+      "title": "육크크 · 공동육아 커뮤니티",
+      "description": "동네 부모들과 함께하는 공동육아 모임과 놀이 미션.",
+      "category": "tool",
+      "tags": [
+        "육아",
+        "커뮤니티",
+        "TypeScript"
+      ],
+      "url": "https://6cc-web.vercel.app/",
+      "date": "2026-10-03",
+      "color": "#0d9488",
+      "icon": "users",
+      "kind": "커뮤니티"
+    },
+    {
       "id": "getdesign",
       "title": "getdesign.md · AI 코딩용 디자인 시스템 모음",
       "description": "유명 사이트의 디자인 시스템을 AI 에이전트용 DESIGN.md로.",
@@ -167,13 +205,6 @@
       "badge": "TOOL",
       "unit": "개",
       "description": "직접 만든 도구"
-    },
-    {
-      "key": "material",
-      "label": "자료",
-      "badge": "NOTE",
-      "unit": "개",
-      "description": "직접 만든 HTML 자료"
     },
     {
       "key": "reference",
