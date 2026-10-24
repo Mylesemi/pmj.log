@@ -13,6 +13,23 @@
   },
   "items": [
     {
+      "id": "nadle",
+      "title": "NADLE · 아이와 함께하는 나들이 탐색",
+      "description": "아이와 갈 만한 공공시설을 찾고 예약 현황을 확인하는 가족 나들이 서비스.",
+      "category": "tool",
+      "tags": [
+        "육아",
+        "나들이",
+        "공공시설",
+        "예약"
+      ],
+      "url": "https://nadle-lyart.vercel.app/",
+      "date": "2026-10-24",
+      "color": "#059669",
+      "icon": "map",
+      "kind": "웹앱"
+    },
+    {
       "id": "taxis-web",
       "title": "TAXIS 2026 · 절세 시뮬레이터",
       "description": "연말정산 9단계를 따라가며 부부 합산 절세액을 계산해요.",
