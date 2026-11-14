@@ -20,17 +20,17 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    # These identifiers are public configuration; authentication uses short-lived OIDC.
-    # Repository Variables take precedence when configured.
+    # Authentication uses short-lived OIDC; identifiers come from Repository Variables.
     env:
-      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER || 'projects/412932215004/locations/global/workloadIdentityPools/github-pmj/providers/github' }}
-      GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT || 'pmj-ga4-reader@pmj-ga4-reader.iam.gserviceaccount.com' }}
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+      GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT }}
+      GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
     steps:
       - uses: actions/checkout@v4
       - name: Validate keyless authentication settings
         run: |
           missing=0
-          for name in GCP_WIF_PROVIDER GCP_SERVICE_ACCOUNT; do
+          for name in GCP_WIF_PROVIDER GCP_SERVICE_ACCOUNT GA4_PROPERTY_ID; do
             if [ -z "${!name}" ]; then
               echo "::error::Authentication setting $name is missing. See GA4_SETUP.md."
               missing=1
@@ -48,8 +48,6 @@ jobs:
           python-version: '3.12'
       - run: pip install google-auth requests
       - name: Fetch GA4 statistics
-        env:
-          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID || '564297056' }}
         run: python scripts/update_analytics.py
       - name: Commit updated statistics
         run: |
