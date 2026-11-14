@@ -249,7 +249,9 @@
     const total = tracked.reduce((n, i) => n + analytics.sites[i.id].days30.visitors, 0);
     const ranked = [...tracked].sort((a, b) => analytics.sites[b.id].days30.visitors - analytics.sites[a.id].days30.visitors);
     const date = analytics.updatedAt ? new Date(analytics.updatedAt).toLocaleString('ko-KR') : '';
-    el.innerHTML = `<strong>최근 30일 사이트별 방문자 합계 ${fmt(total)}명</strong><span> · ${tracked.length}개 사이트 · ${esc(date)} 기준</span>` +
+    const portal = siteStat('pmj-log');
+    const portalSummary = portal ? `<div><strong>최근 30일 pmj.log 방문자 ${fmt(portal.visitors)}명</strong><span> · 조회 ${fmt(portal.views)}회</span></div>` : '';
+    el.innerHTML = portalSummary + `<div>등록 웹서비스 ${tracked.length}개 · 사이트별 방문자 합계 ${fmt(total)}명</div><span>${esc(date)} 기준</span>` +
       (ranked.length ? `<ol class="visitor-ranking">${ranked.slice(0, 5).map((i) => `<li><span>${esc(i.title)}</span><b>${fmt(analytics.sites[i.id].days30.visitors)}명</b></li>`).join('')}</ol>` : '');
   }
 
