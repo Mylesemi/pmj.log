@@ -1,17 +1,19 @@
 # GA4 통합 방문 통계 설정
 
 ## 1. GA4 수집 설정
-Google Analytics에서 GA4 속성과 웹 데이터 스트림을 만들고 측정 ID(G-XXXXXXXXXX)를 확인합니다.
+측정 ID `G-CVFCN7ZP28`을 등록된 웹서비스의 공통 레이아웃에 적용했습니다. 사이트별 배포 후 GA4 실시간 보고서에서 수집 여부를 확인하세요.
+
+Google Analytics에서 GA4 속성과 웹 데이터 스트림을 만들고 측정 ID(G-CVFCN7ZP28)를 확인합니다.
 등록된 **각 웹사이트**의 HTML head 또는 앱 공통 레이아웃에 아래 코드를 추가하세요.
 사이트마다 동일한 GA4 측정 ID를 사용할 수 있으며, 보고서에서는 호스트명으로 구분합니다.
 
 ```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVFCN7ZP28"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-CVFCN7ZP28');
 </script>
 ```
 
