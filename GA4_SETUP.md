@@ -14,9 +14,9 @@
 | `GCP_SERVICE_ACCOUNT` | `pmj-ga4-reader@pmj-ga4-reader.iam.gserviceaccount.com` |
 
 WIF 경로와 서비스 계정 이메일은 비밀키가 아닌 설정 식별자입니다.
-워크플로는 Repository Variables를 우선 사용하고, Variables가 없으면 위의 검증된 기본값을 사용합니다.
+워크플로는 등록된 Repository Variables 세 개(`GCP_WIF_PROVIDER`, `GCP_SERVICE_ACCOUNT`, `GA4_PROPERTY_ID`)를 읽어 실행합니다.
 JSON 키 없이 GitHub OIDC의 단기 자격 증명으로 인증합니다.
-Variables 관리 화면에 로그인하지 못한 상태에서도 통계 갱신은 동작합니다.
+Variables가 비어 있으면 인증 전에 설정 누락을 보고하고 이전 통계를 보존합니다.
 
 ## 빠른 연결: Google Cloud Shell
 
@@ -46,7 +46,7 @@ GitHub CLI(`gh`)가 로그인되어 있으면 다음 Variables를 저장하고 �
 |---|---|
 | `GCP_WIF_PROVIDER` | 스크립트가 출력한 `projects/.../providers/github` |
 | `GCP_SERVICE_ACCOUNT` | 스크립트가 확인한 `pmj-ga4-reader@...iam.gserviceaccount.com` |
-| `GA4_PROPERTY_ID` | `564297056` (생략 시에도 이 값을 기본 사용) |
+| `GA4_PROPERTY_ID` | `564297056` (필수) |
 
 Variables를 저장한 뒤 **Actions → Update GA4 visitor statistics → Run workflow**를 실행합니다.
 `gh`가 설치되어 있으면 `gh auth login`으로 로그인하고 스크립트를 다시 실행해도 됩니다.
@@ -89,7 +89,7 @@ GA4 관리 > 속성 액세스 관리에서 서비스 계정 이메일에 **뷰�
    - `GCP_SERVICE_ACCOUNT`: `pmj-ga4-reader@PROJECT_ID.iam.gserviceaccount.com`
 7. Google Cloud에서 IAM Credentials API 및 Analytics Data API를 활성화합니다.
 
-GA4 속성 ID는 워크플로에 `564297056`으로 설정되어 있습니다. JSON 키나 비밀키는 만들거나 업로드할 필요가 없습니다.
+GA4 속성 ID는 Repository Variable `GA4_PROPERTY_ID`에 `564297056`으로 설정합니다. JSON 키나 비밀키는 만들거나 업로드할 필요가 없습니다.
 
 ## 3. 데이터 갱신
 Actions > Update GA4 visitor statistics > Run workflow를 한 번 실행합니다.
