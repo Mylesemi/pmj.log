@@ -1,0 +1,46 @@
+{
+  "sites": [
+    {
+      "id": "nadle",
+      "host": "nadle-lyart.vercel.app"
+    },
+    {
+      "id": "taxis-web",
+      "host": "mylesemi.github.io",
+      "pathPrefix": "/taxis/"
+    },
+    {
+      "id": "storybeat",
+      "host": "storybeat-beta.vercel.app"
+    },
+    {
+      "id": "sigma",
+      "host": "sigma-phi-eight.vercel.app"
+    },
+    {
+      "id": "character-adv",
+      "host": "character-adv.vercel.app"
+    },
+    {
+      "id": "fam",
+      "host": "fam-inky.vercel.app"
+    },
+    {
+      "id": "dodgepoop",
+      "host": "dodgepoop.vercel.app"
+    },
+    {
+      "id": "udongjeon",
+      "host": "udongjeon.vercel.app"
+    },
+    {
+      "id": "6cc",
+      "host": "6cc-web.vercel.app"
+    },
+    {
+      "id": "pmj-log",
+      "host": "mylesemi.github.io",
+      "pathPrefix": "/pmj.log/"
+    }
+  ]
+}
