@@ -20,17 +20,19 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # These identifiers are public configuration; authentication uses short-lived OIDC.
+    # Repository Variables take precedence when configured.
+    env:
+      GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER || 'projects/412932215004/locations/global/workloadIdentityPools/github-pmj/providers/github' }}
+      GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT || 'pmj-ga4-reader@pmj-ga4-reader.iam.gserviceaccount.com' }}
     steps:
       - uses: actions/checkout@v4
       - name: Validate keyless authentication settings
-        env:
-          GCP_WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
-          GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT }}
         run: |
           missing=0
           for name in GCP_WIF_PROVIDER GCP_SERVICE_ACCOUNT; do
             if [ -z "${!name}" ]; then
-              echo "::error::Repository variable $name is missing. See GA4_SETUP.md."
+              echo "::error::Authentication setting $name is missing. See GA4_SETUP.md."
               missing=1
             fi
           done
@@ -38,8 +40,8 @@ jobs:
       - name: Authenticate to Google Cloud without a key
         uses: google-github-actions/auth@v3
         with:
-          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
-          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ env.GCP_WIF_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
           create_credentials_file: true
       - uses: actions/setup-python@v5
         with:
