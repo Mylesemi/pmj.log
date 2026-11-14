@@ -24,9 +24,19 @@ SPA 사이트는 라우트 변경 시 중복 page_view가 기록되지 않는지
 Google Cloud에서 Google Analytics Data API를 활성화하고 서비스 계정을 생성합니다.
 GA4 관리 > 속성 액세스 관리에서 서비스 계정 이메일에 **뷰어** 권한을 부여하세요.
 
-GitHub 저장소 Settings > Secrets and variables > Actions에 다음 Repository secrets를 등록합니다.
-- `GA4_PROPERTY_ID`: GA4 속성의 숫자 ID (측정 ID와 다름)
-- `GA4_SERVICE_ACCOUNT_JSON`: 서비스 계정 JSON 전체 내용 (절대 코드에 커밋하지 마세요)
+**JSON 키 없이 연결 (Workload Identity Federation)**
+
+1. Google Cloud에서 IAM & Admin > Workload Identity Federation으로 이동하여 풀 `github-pmj`를 생성합니다.
+2. OIDC 공급자를 추가합니다. 발급자 URL: `https://token.actions.githubusercontent.com`, 대상(audience)은 기본값을 사용합니다.
+3. 속성 매핑: `google.subject=assertion.sub`, `attribute.repository=assertion.repository`.
+4. 공급자 속성 조건: `assertion.repository == "Mylesemi/pmj.log"` (다른 저장소의 인증 거부).
+5. `pmj-ga4-reader` 서비스 계정 > 권한 > 액세스 권한 부여에서 **Workload Identity User** 역할을 부여합니다. 구성원 형식: `principalSet://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/github-pmj/attribute.repository/Mylesemi/pmj.log` (PROJECT_NUMBER는 프로젝트 **번호**).
+6. GitHub 저장소 Settings > Secrets and variables > Actions > **Variables**에서 다음 두 Repository variables를 추가합니다.
+   - `GCP_WIF_PROVIDER`: `projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/github-pmj/providers/PROVIDER_ID`
+   - `GCP_SERVICE_ACCOUNT`: `pmj-ga4-reader@PROJECT_ID.iam.gserviceaccount.com`
+7. Google Cloud에서 IAM Credentials API 및 Analytics Data API를 활성화합니다.
+
+GA4 속성 ID는 워크플로에 `564297056`으로 설정되어 있습니다. JSON 키나 비밀키는 만들거나 업로드할 필요가 없습니다.
 
 ## 3. 데이터 갱신
 Actions > Update GA4 visitor statistics > Run workflow를 한 번 실행합니다.
