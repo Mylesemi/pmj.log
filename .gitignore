@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+gha-creds-*.json
+analytics.json.tmp

@@ -1,5 +1,40 @@
 # GA4 통합 방문 통계 설정
 
+## 빠른 연결: Google Cloud Shell
+
+`pmj-ga4-reader`를 만든 Google Cloud 프로젝트를 선택하고 Cloud Shell에서 실행합니다.
+서비스 계정과 기존 GA4 뷰어 권한을 그대로 사용하며 JSON 키는 생성하지 않습니다.
+
+```bash
+git clone https://github.com/Mylesemi/pmj.log.git pmj-ga4-setup
+cd pmj-ga4-setup
+bash scripts/setup_ga4_wif.sh
+```
+
+이미 내려받은 저장소에서는 `git pull` 후 마지막 명령만 다시 실행하면 됩니다.
+프로젝트를 명시하려면 `bash scripts/setup_ga4_wif.sh YOUR_PROJECT_ID`로 실행합니다.
+서비스 계정이 그 프로젝트에 없으면 변경 전에 중단합니다.
+
+이 스크립트는 필요한 API와 `github-pmj` 풀, `github` OIDC 공급자를 설정하고,
+해당 서비스 계정에 `roles/iam.workloadIdentityUser` 바인딩을 추가합니다.
+GitHub의 고정 저장소 ID `1430624700`, 소유자 ID `94043537`, `main` 브랜치의
+`ga4-analytics.yml` 워크플로만 인증할 수 있도록 제한합니다.
+
+GitHub CLI(`gh`)가 로그인되어 있으면 다음 Variables를 저장하고 갱신 워크플로를 실행합니다.
+로그인되어 있지 않으면 실제 프로젝트 번호와 이메일이 포함된 값을 출력하므로
+[GitHub Actions Variables](https://github.com/Mylesemi/pmj.log/settings/variables/actions)에 추가하세요.
+
+| Variable | 값 |
+|---|---|
+| `GCP_WIF_PROVIDER` | 스크립트가 출력한 `projects/.../providers/github` |
+| `GCP_SERVICE_ACCOUNT` | 스크립트가 확인한 `pmj-ga4-reader@...iam.gserviceaccount.com` |
+| `GA4_PROPERTY_ID` | `564297056` (생략 시에도 이 값을 기본 사용) |
+
+Variables를 저장한 뒤 **Actions → Update GA4 visitor statistics → Run workflow**를 실행합니다.
+`gh`가 설치되어 있으면 `gh auth login`으로 로그인하고 스크립트를 다시 실행해도 됩니다.
+새 WIF 설정의 전파에 몇 분이 걸릴 수 있으므로 생성 직후 인증이 거부되면 잠시 후 다시 실행합니다.
+GA4 뷰어 권한은 Google Cloud IAM 역할과 별개입니다.
+
 ## 1. GA4 수집 설정
 측정 ID `G-CVFCN7ZP28`을 등록된 웹서비스의 공통 레이아웃에 적용했습니다. 사이트별 배포 후 GA4 실시간 보고서에서 수집 여부를 확인하세요.
 
@@ -40,9 +75,23 @@ GA4 속성 ID는 워크플로에 `564297056`으로 설정되어 있습니다. JS
 
 ## 3. 데이터 갱신
 Actions > Update GA4 visitor statistics > Run workflow를 한 번 실행합니다.
-이후 매일 01:17 UTC에 `analytics.json`이 자동 갱신됩니다.
-GitHub Pages에 반영되면 pmj.log가 이 파일을 읽어 각 카드에 방문자 수를 표시합니다.
+이후 매일 **10:17 한국시간(01:17 UTC)**에 `analytics.json`이 자동 갱신됩니다.
+워크플로는 갱신한 파일을 커밋한 뒤 GitHub Pages 빌드를 명시적으로 요청합니다.
+`GITHUB_TOKEN`으로 만든 커밋은 자체적으로 Pages 빌드를 시작하지 않기 때문입니다.
+빌드가 끝나면 pmj.log가 이 파일을 읽어 각 카드에 방문자 수를 표시합니다.
 오류가 발생하면 이전 수치를 유지하고 GitHub Actions 로그를 확인하세요.
+
+### 연결 확인
+
+- `Validate keyless authentication settings`: 필수 Variables 누락을 바로 알려줍니다.
+- `Authenticate to Google Cloud without a key`: GitHub OIDC → WIF → 기존 서비스 계정 인증입니다.
+- `Fetch GA4 statistics`: GA4의 `activeUsers`, `screenPageViews`를 실제 조회합니다.
+- 워크플로 Summary에는 사이트별 최근 30일 방문자·조회 수가 표시됩니다.
+- 배포 후 `https://mylesemi.github.io/pmj.log/analytics.json`의 `status`가 `ok`이고,
+  `updatedAt`과 수치가 Summary와 일치하는지 확인합니다.
+- API가 정상적인 빈 보고서를 반환한 경우에만 0으로 기록합니다. 인증·권한 오류는 성공으로 처리하지 않습니다.
+- 최근 7일·30일은 GA4 속성의 시간대에서 오늘을 포함한 각각 7일·30일입니다.
+- 로컬 회귀 확인: `python -m unittest discover -s tests -v`.
 
 ## 주의
 - 설정 전에는 수치를 0으로 표시하지 않고 '통계 준비 중'으로 표시합니다.
