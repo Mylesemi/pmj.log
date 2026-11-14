@@ -1,5 +1,186 @@
 {
-  "status": "not_configured",
-  "updatedAt": null,
-  "sites": {}
+  "status": "ok",
+  "updatedAt": "2026-11-14T23:14:45.543210+00:00",
+  "sites": {
+    "nadle": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "taxis-web": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "storybeat": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "sigma": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "character-adv": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "fam": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "dodgepoop": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "udongjeon": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "6cc": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "pmj-log": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 1,
+        "views": 1
+      },
+      "days30": {
+        "visitors": 1,
+        "views": 1
+      },
+      "all": {
+        "visitors": 1,
+        "views": 1
+      }
+    }
+  }
 }
