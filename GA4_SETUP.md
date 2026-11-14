@@ -1,5 +1,23 @@
 # GA4 통합 방문 통계 설정
 
+## 현재 연결 설정
+
+2026-11-15에 GitHub Actions의 OIDC 인증, GA4 Data API 조회, GitHub Pages 통계 표시를 확인했습니다.
+
+| 설정 | 값 |
+|---|---|
+| GA4 속성 ID | `564297056` |
+| 측정 ID | `G-CVFCN7ZP28` |
+| Google Cloud 프로젝트 | `pmj-ga4-reader` |
+| 프로젝트 번호 | `412932215004` |
+| `GCP_WIF_PROVIDER` | `projects/412932215004/locations/global/workloadIdentityPools/github-pmj/providers/github` |
+| `GCP_SERVICE_ACCOUNT` | `pmj-ga4-reader@pmj-ga4-reader.iam.gserviceaccount.com` |
+
+WIF 경로와 서비스 계정 이메일은 비밀키가 아닌 설정 식별자입니다.
+워크플로는 Repository Variables를 우선 사용하고, Variables가 없으면 위의 검증된 기본값을 사용합니다.
+JSON 키 없이 GitHub OIDC의 단기 자격 증명으로 인증합니다.
+Variables 관리 화면에 로그인하지 못한 상태에서도 통계 갱신은 동작합니다.
+
 ## 빠른 연결: Google Cloud Shell
 
 `pmj-ga4-reader`를 만든 Google Cloud 프로젝트를 선택하고 Cloud Shell에서 실행합니다.
@@ -83,7 +101,7 @@ Actions > Update GA4 visitor statistics > Run workflow를 한 번 실행합니�
 
 ### 연결 확인
 
-- `Validate keyless authentication settings`: 필수 Variables 누락을 바로 알려줍니다.
+- `Validate keyless authentication settings`: WIF 경로와 서비스 계정 설정이 비어 있는지 확인합니다.
 - `Authenticate to Google Cloud without a key`: GitHub OIDC → WIF → 기존 서비스 계정 인증입니다.
 - `Fetch GA4 statistics`: GA4의 `activeUsers`, `screenPageViews`를 실제 조회합니다.
 - 워크플로 Summary에는 사이트별 최근 30일 방문자·조회 수가 표시됩니다.
