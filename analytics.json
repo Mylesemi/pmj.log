@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-14T23:29:15.728623+00:00",
+  "updatedAt": "2026-11-14T23:50:29.436513+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -147,6 +147,24 @@
       }
     },
     "6cc": {
+      "today": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days7": {
+        "visitors": 0,
+        "views": 0
+      },
+      "days30": {
+        "visitors": 0,
+        "views": 0
+      },
+      "all": {
+        "visitors": 0,
+        "views": 0
+      }
+    },
+    "land-scout": {
       "today": {
         "visitors": 0,
         "views": 0
