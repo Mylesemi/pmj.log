@@ -38,6 +38,11 @@
       "host": "6cc-web.vercel.app"
     },
     {
+      "id": "land-scout",
+      "host": "mylesemi.github.io",
+      "pathPrefix": "/land-scout/"
+    },
+    {
       "id": "pmj-log",
       "host": "mylesemi.github.io",
       "pathPrefix": "/pmj.log/"

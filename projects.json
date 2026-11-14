@@ -13,6 +13,24 @@
   },
   "items": [
     {
+      "id": "land-scout",
+      "title": "LAND SCOUT · 공매 토지·주택 탐색",
+      "description": "온비드 공매 토지·주택을 예산에 맞춰 찾고 물건 정보와 지도 위치를 확인해요.",
+      "category": "tool",
+      "tags": [
+        "공매",
+        "토지",
+        "주택",
+        "지도"
+      ],
+      "url": "https://mylesemi.github.io/land-scout/",
+      "repo": "https://github.com/Mylesemi/land-scout",
+      "date": "2026-11-15",
+      "color": "#0e7490",
+      "icon": "map",
+      "kind": "웹앱"
+    },
+    {
       "id": "nadle",
       "title": "NADLE · 아이와 함께하는 나들이 탐색",
       "description": "아이와 갈 만한 공공시설을 찾고 예약 현황을 확인하는 가족 나들이 서비스.",
