@@ -5,17 +5,15 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import google.auth.transport.requests
-from google.oauth2 import service_account
+import google.auth
 import requests
 
 ROOT = Path(__file__).resolve().parents[1]
 property_id = os.environ.get("GA4_PROPERTY_ID", "").strip()
-service_json = os.environ.get("GA4_SERVICE_ACCOUNT_JSON", "").strip()
-if not property_id or not service_json:
-    raise SystemExit("Set GA4_PROPERTY_ID and GA4_SERVICE_ACCOUNT_JSON repository secrets.")
+if not property_id:
+    raise SystemExit("GA4_PROPERTY_ID is required.")
 
-credentials = service_account.Credentials.from_service_account_info(
-    json.loads(service_json),
+credentials, _ = google.auth.default(
     scopes=["https://www.googleapis.com/auth/analytics.readonly"],
 )
 credentials.refresh(google.auth.transport.requests.Request())
