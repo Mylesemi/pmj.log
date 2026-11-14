@@ -52,6 +52,10 @@
 
   const state = { cat: 'all', tag: '', q: '', sort: 'date' };
   let items = [];
+  let analytics = null;
+  const fmt = (n) => new Intl.NumberFormat('ko-KR').format(n);
+  const siteStat = (id) => analytics?.sites?.[id]?.days30;
+
 
   /* ---------- URL hash <-> state ---------- */
   function readHash() {
@@ -150,6 +154,8 @@
     // 항목별 color가 있으면 그 색으로, 없으면 카테고리 색으로 카드를 칠한다
     const color = /^#[0-9a-f]{3,8}$/i.test(item.color || '') ? ` style="--c:${item.color}"` : '';
     const tags = (item.tags || []).map((t) => `<span>#${esc(t)}</span>`).join('');
+    const stats = item.category === 'tool' && /^https?:/.test(item.url) && !item.url.includes('github.com/')
+      ? `<div class="visitor-stat" aria-label="최근 30일 방문 통계">${siteStat(item.id) ? `최근 30일 방문자 <b>${fmt(siteStat(item.id).visitors)}</b>명 · 조회 ${fmt(siteStat(item.id).views)}회` : '방문 통계 준비 중'}</div>` : '';
     const repo = item.repo ? `<a class="card-link sub" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
     // 추가 링크 (예: 오프라인 버전, 다운로드)
     const extra = (item.links || []).map((l) => `<a class="card-link sub" href="${esc(l.url)}"${linkAttrs(l.url)}>${esc(l.label)}${ICONS.arrow}</a>`).join('');
@@ -165,6 +171,7 @@
         <h3 class="card-title"><a href="${esc(item.url)}"${linkAttrs(item.url)}>${esc(item.title)}</a></h3>
         ${item.description ? `<p class="card-desc">${esc(item.description)}</p>` : ''}
         ${tags ? `<div class="card-tags">${tags}</div>` : ''}
+        ${stats}
         <div class="card-foot">
           <span class="card-link">열기${ICONS.arrow}</span>
           ${extra}${repo}
@@ -229,6 +236,34 @@
     $('#featured-section').hidden = list.length === 0;
     $('#featured').className = listClass;
     $('#featured').innerHTML = list.map(itemHTML).join('');
+  }
+
+  function renderAnalyticsSummary() {
+    const el = $('#analytics-summary');
+    if (!el) return;
+    if (!analytics || analytics.status !== 'ok') {
+      el.textContent = '방문 통계 준비 중 · GA4 연동 후 자동 표시됩니다.';
+      return;
+    }
+    const tracked = items.filter((i) => analytics.sites?.[i.id]?.days30);
+    const total = tracked.reduce((n, i) => n + analytics.sites[i.id].days30.visitors, 0);
+    const ranked = [...tracked].sort((a, b) => analytics.sites[b.id].days30.visitors - analytics.sites[a.id].days30.visitors);
+    const date = analytics.updatedAt ? new Date(analytics.updatedAt).toLocaleString('ko-KR') : '';
+    el.innerHTML = `<strong>최근 30일 사이트별 방문자 합계 ${fmt(total)}명</strong><span> · ${tracked.length}개 사이트 · ${esc(date)} 기준</span>` +
+      (ranked.length ? `<ol class="visitor-ranking">${ranked.slice(0, 5).map((i) => `<li><span>${esc(i.title)}</span><b>${fmt(analytics.sites[i.id].days30.visitors)}명</b></li>`).join('')}</ol>` : '');
+  }
+
+  async function loadAnalytics() {
+    try {
+      const response = await fetch('analytics.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error(response.status);
+      analytics = await response.json();
+    } catch (err) {
+      console.warn('방문 통계를 불러오지 못했습니다.', err);
+    }
+    renderAnalyticsSummary();
+    renderGrid();
+    renderFeatured();
   }
 
   function update() {
@@ -309,6 +344,7 @@
     renderStats();
     renderFeatured();
     update();
+    loadAnalytics();
   }
 
   init();
