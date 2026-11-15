@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-14T23:50:29.436513+00:00",
+  "updatedAt": "2026-11-15T07:52:21.320755+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -112,20 +112,20 @@
     },
     "dodgepoop": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       },
       "days7": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       },
       "days30": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       },
       "all": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       }
     },
     "udongjeon": {
@@ -166,38 +166,38 @@
     },
     "land-scout": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 3
       },
       "days7": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 3
       },
       "days30": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 3
       },
       "all": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 3
       }
     },
     "pmj-log": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 2,
+        "views": 10
       },
       "days7": {
-        "visitors": 1,
-        "views": 1
+        "visitors": 2,
+        "views": 11
       },
       "days30": {
-        "visitors": 1,
-        "views": 1
+        "visitors": 2,
+        "views": 11
       },
       "all": {
-        "visitors": 1,
-        "views": 1
+        "visitors": 2,
+        "views": 11
       }
     }
   }
