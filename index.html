@@ -107,6 +107,23 @@
     <div class="container"><span id="updated"></span></div>
   </footer>
 
+  <dialog id="visitor-dialog" class="visitor-dialog" aria-labelledby="visitor-dialog-title" aria-describedby="visitor-dialog-note">
+    <div class="visitor-dialog-head">
+      <div>
+        <p class="visitor-dialog-eyebrow">방문자 수 조회</p>
+        <h2 id="visitor-dialog-title">방문 통계</h2>
+      </div>
+      <form method="dialog">
+        <button class="icon-btn" type="submit" aria-label="방문 통계 닫기">×</button>
+      </form>
+    </div>
+    <div id="visitor-dialog-body" class="visitor-dialog-body" aria-live="polite" aria-atomic="true"></div>
+    <div class="visitor-dialog-foot">
+      <p id="visitor-dialog-note">최근 집계된 통계이며, 방문 직후에는 반영되지 않을 수 있어요.</p>
+      <button id="visitor-refresh" class="btn" type="button">다시 조회</button>
+    </div>
+  </dialog>
+
   <script src="assets/app.js"></script>
 </body>
 </html>

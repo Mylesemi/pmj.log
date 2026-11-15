@@ -53,8 +53,15 @@
   const state = { cat: 'all', tag: '', q: '', sort: 'date' };
   let items = [];
   let analytics = null;
+  let analyticsRequest = null;
+  let activeVisitorId = null;
+  let visitorRequestNumber = 0;
   const fmt = (n) => new Intl.NumberFormat('ko-KR').format(n);
   const siteStat = (id) => analytics?.sites?.[id]?.days30;
+  const visitorSummary = (id) => {
+    const stat = siteStat(id);
+    return stat ? `최근 30일 방문자 <b>${fmt(stat.visitors)}</b>명 · 조회 ${fmt(stat.views)}회` : '방문 통계 준비 중';
+  };
 
 
   /* ---------- URL hash <-> state ---------- */
@@ -155,7 +162,7 @@
     const color = /^#[0-9a-f]{3,8}$/i.test(item.color || '') ? ` style="--c:${item.color}"` : '';
     const tags = (item.tags || []).map((t) => `<span>#${esc(t)}</span>`).join('');
     const stats = item.category === 'tool' && /^https?:/.test(item.url) && !item.url.includes('github.com/')
-      ? `<div class="visitor-stat" aria-label="최근 30일 방문 통계">${siteStat(item.id) ? `최근 30일 방문자 <b>${fmt(siteStat(item.id).visitors)}</b>명 · 조회 ${fmt(siteStat(item.id).views)}회` : '방문 통계 준비 중'}</div>` : '';
+      ? `<div class="visitor-stat" aria-label="최근 30일 방문 통계"><span data-visitor-count="${esc(item.id)}">${visitorSummary(item.id)}</span><button class="visitor-query-btn" type="button" data-visitor-id="${esc(item.id)}" aria-label="${esc(item.title)} 방문자 수 조회" aria-haspopup="dialog" aria-controls="visitor-dialog">방문자 수 조회</button></div>` : '';
     const repo = item.repo ? `<a class="card-link sub" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
     // 추가 링크 (예: 오프라인 버전, 다운로드)
     const extra = (item.links || []).map((l) => `<a class="card-link sub" href="${esc(l.url)}"${linkAttrs(l.url)}>${esc(l.label)}${ICONS.arrow}</a>`).join('');
@@ -238,34 +245,75 @@
     $('#featured').innerHTML = list.map(itemHTML).join('');
   }
 
-  function renderAnalyticsSummary() {
-    const el = $('#analytics-summary');
-    if (!el) return;
-    if (!analytics || analytics.status !== 'ok') {
-      el.textContent = '방문 통계 준비 중 · GA4 연동 후 자동 표시됩니다.';
-      return;
+  function refreshAnalytics() {
+    if (!analyticsRequest) {
+      analyticsRequest = (async () => {
+        const response = await fetch('analytics.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(response.status);
+        const data = await response.json();
+        if (!data || typeof data !== 'object' || !data.sites || typeof data.sites !== 'object') {
+          throw new Error('Invalid visitor statistics');
+        }
+        analytics = data;
+      })().finally(() => { analyticsRequest = null; });
     }
-    const tracked = items.filter((i) => analytics.sites?.[i.id]?.days30);
-    const total = tracked.reduce((n, i) => n + analytics.sites[i.id].days30.visitors, 0);
-    const ranked = [...tracked].sort((a, b) => analytics.sites[b.id].days30.visitors - analytics.sites[a.id].days30.visitors);
-    const date = analytics.updatedAt ? new Date(analytics.updatedAt).toLocaleString('ko-KR') : '';
-    const portal = siteStat('pmj-log');
-    const portalSummary = portal ? `<div><strong>최근 30일 pmj.log 방문자 ${fmt(portal.visitors)}명</strong><span> · 조회 ${fmt(portal.views)}회</span></div>` : '';
-    el.innerHTML = portalSummary + `<div>등록 웹서비스 ${tracked.length}개 · 사이트별 방문자 합계 ${fmt(total)}명</div><span>${esc(date)} 기준</span>` +
-      (ranked.length ? `<ol class="visitor-ranking">${ranked.slice(0, 5).map((i) => `<li><span>${esc(i.title)}</span><b>${fmt(analytics.sites[i.id].days30.visitors)}명</b></li>`).join('')}</ol>` : '');
+    return analyticsRequest;
   }
 
   async function loadAnalytics() {
     try {
-      const response = await fetch('analytics.json', { cache: 'no-store' });
-      if (!response.ok) throw new Error(response.status);
-      analytics = await response.json();
+      await refreshAnalytics();
     } catch (err) {
       console.warn('방문 통계를 불러오지 못했습니다.', err);
     }
-    renderAnalyticsSummary();
     renderGrid();
     renderFeatured();
+  }
+
+  function renderVisitorDetails(id, failed = false) {
+    const body = $('#visitor-dialog-body');
+    const site = analytics?.status === 'ok' ? analytics.sites?.[id] : null;
+    if (!site) {
+      body.textContent = failed ? '통계를 불러오지 못했어요. 다시 조회해 주세요.' : '아직 집계된 방문 통계가 없어요. 잠시 후 다시 확인해 주세요.';
+      return;
+    }
+    const value = (n, unit) => Number.isFinite(n) && n >= 0 ? `${fmt(n)}${unit}` : '—';
+    const periods = [['today', '오늘'], ['days7', '최근 7일'], ['days30', '최근 30일'], ['all', '전체 기간']];
+    const updated = analytics.updatedAt ? new Date(analytics.updatedAt) : null;
+    const timestamp = !updated || Number.isNaN(updated.getTime()) ? '' : new Intl.DateTimeFormat('ko-KR', {
+      dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Seoul',
+    }).format(updated);
+    body.innerHTML = (failed ? '<p class="visitor-notice">최신 통계를 불러오지 못해 이전 집계 수치를 표시해요.</p>' : '') +
+      `<table class="visitor-table"><caption class="sr-only">기간별 방문자 수와 조회 수</caption><thead><tr><th scope="col">기간</th><th scope="col">방문자</th><th scope="col">조회</th></tr></thead><tbody>${periods.map(([key, label]) => `<tr><th scope="row">${label}</th><td>${value(site[key]?.visitors, '명')}</td><td>${value(site[key]?.views, '회')}</td></tr>`).join('')}</tbody></table>` +
+      (timestamp ? `<p class="visitor-updated">${esc(timestamp)} 집계 · 한국시간</p>` : '');
+  }
+
+  async function queryVisitors(id) {
+    const item = items.find((i) => i.id === id);
+    const dialog = $('#visitor-dialog');
+    if (!item || !dialog) return;
+    activeVisitorId = id;
+    const request = ++visitorRequestNumber;
+    $('#visitor-dialog-title').textContent = item.title;
+    $('#visitor-dialog-body').textContent = '방문 통계를 조회하고 있어요…';
+    const refreshButton = $('#visitor-refresh');
+    refreshButton.disabled = true;
+    refreshButton.textContent = '조회 중…';
+    if (!dialog.open) dialog.showModal();
+    try {
+      await refreshAnalytics();
+      document.querySelectorAll('[data-visitor-count]').forEach((el) => {
+        el.innerHTML = visitorSummary(el.dataset.visitorCount);
+      });
+      if (request === visitorRequestNumber && dialog.open) renderVisitorDetails(id);
+    } catch (err) {
+      if (request === visitorRequestNumber && dialog.open) renderVisitorDetails(id, true);
+    } finally {
+      if (request === visitorRequestNumber) {
+        refreshButton.disabled = false;
+        refreshButton.textContent = '다시 조회';
+      }
+    }
   }
 
   function update() {
@@ -279,6 +327,18 @@
 
   /* ---------- Events ---------- */
   function bindEvents() {
+    document.addEventListener('click', (e) => {
+      const button = e.target.closest('[data-visitor-id]');
+      if (!button) return;
+      e.preventDefault();
+      queryVisitors(button.dataset.visitorId);
+    });
+    $('#visitor-refresh')?.addEventListener('click', () => queryVisitors(activeVisitorId));
+    $('#visitor-dialog')?.addEventListener('close', () => {
+      visitorRequestNumber++;
+      const button = [...document.querySelectorAll('[data-visitor-id]')].find((el) => el.dataset.visitorId === activeVisitorId);
+      button?.focus({ preventScroll: true });
+    });
     $('#category-tabs').addEventListener('click', (e) => {
       const b = e.target.closest('[data-cat]');
       if (b) { state.cat = b.dataset.cat; update(); }
