@@ -5,6 +5,8 @@
   const DATA_SRC = document.body.dataset.src || 'projects.json';
   const VIEW = document.body.dataset.view === 'shelf' ? 'shelf' : 'cards';
   const GROUP = document.body.dataset.group === 'category' ? 'category' : 'year';
+  const IS_OWNER = document.documentElement.dataset.owner === 'true';
+  const isGitHub = (url) => /^https?:\/\/(?:www\.)?github\.com(?:[\/?#]|$)/i.test(url || '');
   const DEFAULT_CATEGORIES = [
     { key: 'tool', label: 'Tool', badge: 'TOOL', unit: '개' },
     { key: 'material', label: '자료', badge: 'NOTE', unit: '개' },
@@ -90,9 +92,9 @@
     $('#hero-title').innerHTML = lines.map((l, i) => `<span${i ? ' class="accent"' : ''}>${esc(l)}</span>`).join('');
     $('#hero-tagline').textContent = profile.tagline || '';
     const links = [];
-    if (profile.github) links.push(`<a href="${esc(profile.github)}" target="_blank" rel="noopener">GitHub${ICONS.arrow}</a>`);
+    if (IS_OWNER && profile.github) links.push(`<a href="${esc(profile.github)}" target="_blank" rel="noopener">GitHub${ICONS.arrow}</a>`);
     if (profile.email) links.push(`<a href="mailto:${esc(profile.email)}">${esc(profile.email)}${ICONS.arrow}</a>`);
-    (profile.links || []).forEach((l) => links.push(`<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}${ICONS.arrow}</a>`));
+    (profile.links || []).filter((l) => IS_OWNER || !isGitHub(l.url)).forEach((l) => links.push(`<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}${ICONS.arrow}</a>`));
     $('#profile-links').innerHTML = links.join('');
   }
 
@@ -161,11 +163,11 @@
     // 항목별 color가 있으면 그 색으로, 없으면 카테고리 색으로 카드를 칠한다
     const color = /^#[0-9a-f]{3,8}$/i.test(item.color || '') ? ` style="--c:${item.color}"` : '';
     const tags = (item.tags || []).map((t) => `<span>#${esc(t)}</span>`).join('');
-    const stats = item.category === 'tool' && /^https?:/.test(item.url) && !item.url.includes('github.com/')
+    const stats = IS_OWNER && item.category === 'tool' && /^https?:/.test(item.url) && !item.url.includes('github.com/')
       ? `<div class="visitor-stat" aria-label="최근 30일 방문 통계"><span data-visitor-count="${esc(item.id)}">${visitorSummary(item.id)}</span><button class="visitor-query-btn" type="button" data-visitor-id="${esc(item.id)}" aria-label="${esc(item.title)} 방문자 수 조회" aria-haspopup="dialog" aria-controls="visitor-dialog">방문자 수 조회</button></div>` : '';
-    const repo = item.repo ? `<a class="card-link sub" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
+    const repo = IS_OWNER && item.repo ? `<a class="card-link sub" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
     // 추가 링크 (예: 오프라인 버전, 다운로드)
-    const extra = (item.links || []).map((l) => `<a class="card-link sub" href="${esc(l.url)}"${linkAttrs(l.url)}>${esc(l.label)}${ICONS.arrow}</a>`).join('');
+    const extra = (item.links || []).filter((l) => IS_OWNER || !isGitHub(l.url)).map((l) => `<a class="card-link sub" href="${esc(l.url)}"${linkAttrs(l.url)}>${esc(l.label)}${ICONS.arrow}</a>`).join('');
     return `
       <article class="card" data-cat="${esc(item.category)}"${color}>
         <div class="card-head">
@@ -246,6 +248,7 @@
   }
 
   function refreshAnalytics() {
+    if (!IS_OWNER) return Promise.resolve();
     if (!analyticsRequest) {
       analyticsRequest = (async () => {
         const response = await fetch('analytics.json', { cache: 'no-store' });
@@ -261,6 +264,7 @@
   }
 
   async function loadAnalytics() {
+    if (!IS_OWNER) return;
     try {
       await refreshAnalytics();
     } catch (err) {
@@ -289,6 +293,7 @@
   }
 
   async function queryVisitors(id) {
+    if (!IS_OWNER) return;
     const item = items.find((i) => i.id === id);
     const dialog = $('#visitor-dialog');
     if (!item || !dialog) return;
@@ -327,6 +332,11 @@
 
   /* ---------- Events ---------- */
   function bindEvents() {
+    $('#owner-exit')?.addEventListener('click', () => {
+      try { localStorage.removeItem('pmj.log.owner-view'); } catch (err) {}
+      document.documentElement.dataset.owner = 'false';
+      location.reload();
+    });
     document.addEventListener('click', (e) => {
       const button = e.target.closest('[data-visitor-id]');
       if (!button) return;
@@ -387,6 +397,7 @@
 
   /* ---------- Init ---------- */
   async function init() {
+    document.querySelectorAll('[data-owner-only]').forEach((el) => { el.hidden = !IS_OWNER; });
     bindEvents();
     try {
       const res = await fetch(DATA_SRC, { cache: 'no-cache' });

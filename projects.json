@@ -13,6 +13,24 @@
   },
   "items": [
     {
+      "id": "gongsa-map",
+      "title": "여기공사 · 전국 공사 지도",
+      "description": "공개된 공사·개발 사업과 도로 통제 정보를 지도와 목록으로 확인해요.",
+      "category": "tool",
+      "tags": [
+        "공사",
+        "도로 통제",
+        "공공데이터",
+        "지도"
+      ],
+      "url": "https://gongsa-map.vercel.app/?type=rail&source=utic",
+      "repo": "https://github.com/Mylesemi/gongsa-map",
+      "date": "2026-11-17",
+      "color": "#ea580c",
+      "icon": "map",
+      "kind": "웹앱"
+    },
+    {
       "id": "land-scout",
       "title": "LAND SCOUT · 공매 토지·주택 탐색",
       "description": "온비드 공매 토지·주택을 예산에 맞춰 찾고 물건 정보와 지도 위치를 확인해요.",
