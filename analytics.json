@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-16T07:58:47.951885+00:00",
+  "updatedAt": "2026-11-17T09:13:08.011611+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -58,20 +58,20 @@
     },
     "sigma": {
       "today": {
-        "visitors": 1,
-        "views": 10
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 1,
-        "views": 10
+        "views": 11
       },
       "days30": {
         "visitors": 1,
-        "views": 10
+        "views": 11
       },
       "all": {
         "visitors": 1,
-        "views": 10
+        "views": 11
       }
     },
     "character-adv": {
@@ -112,20 +112,20 @@
     },
     "dodgepoop": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 3,
+        "views": 5
       },
       "days7": {
-        "visitors": 3,
-        "views": 3
+        "visitors": 5,
+        "views": 8
       },
       "days30": {
-        "visitors": 3,
-        "views": 3
+        "visitors": 5,
+        "views": 8
       },
       "all": {
-        "visitors": 3,
-        "views": 3
+        "visitors": 5,
+        "views": 8
       }
     },
     "udongjeon": {
@@ -166,38 +166,38 @@
     },
     "land-scout": {
       "today": {
-        "visitors": 2,
-        "views": 2
-      },
-      "days7": {
-        "visitors": 3,
-        "views": 12
-      },
-      "days30": {
-        "visitors": 3,
-        "views": 12
-      },
-      "all": {
-        "visitors": 3,
-        "views": 12
-      }
-    },
-    "pmj-log": {
-      "today": {
         "visitors": 0,
         "views": 0
       },
       "days7": {
+        "visitors": 3,
+        "views": 14
+      },
+      "days30": {
+        "visitors": 3,
+        "views": 14
+      },
+      "all": {
+        "visitors": 3,
+        "views": 14
+      }
+    },
+    "pmj-log": {
+      "today": {
+        "visitors": 1,
+        "views": 4
+      },
+      "days7": {
         "visitors": 4,
-        "views": 23
+        "views": 27
       },
       "days30": {
         "visitors": 4,
-        "views": 23
+        "views": 27
       },
       "all": {
         "visitors": 4,
-        "views": 23
+        "views": 27
       }
     }
   }
