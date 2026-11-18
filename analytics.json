@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-17T09:13:08.011611+00:00",
+  "updatedAt": "2026-11-18T08:31:46.521818+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -112,8 +112,8 @@
     },
     "dodgepoop": {
       "today": {
-        "visitors": 3,
-        "views": 5
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 5,
@@ -184,20 +184,20 @@
     },
     "pmj-log": {
       "today": {
-        "visitors": 1,
-        "views": 4
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 4,
-        "views": 27
+        "views": 29
       },
       "days30": {
         "visitors": 4,
-        "views": 27
+        "views": 29
       },
       "all": {
         "visitors": 4,
-        "views": 27
+        "views": 29
       }
     }
   }
