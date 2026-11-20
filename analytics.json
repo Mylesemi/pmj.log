@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-19T08:48:33.544600+00:00",
+  "updatedAt": "2026-11-20T08:32:48.640864+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -58,20 +58,20 @@
     },
     "sigma": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 3,
+        "views": 30
       },
       "days7": {
-        "visitors": 1,
-        "views": 11
+        "visitors": 3,
+        "views": 41
       },
       "days30": {
-        "visitors": 1,
-        "views": 11
+        "visitors": 3,
+        "views": 41
       },
       "all": {
-        "visitors": 1,
-        "views": 11
+        "visitors": 3,
+        "views": 41
       }
     },
     "character-adv": {
@@ -184,20 +184,20 @@
     },
     "pmj-log": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       },
       "days7": {
         "visitors": 4,
-        "views": 29
+        "views": 30
       },
       "days30": {
         "visitors": 4,
-        "views": 29
+        "views": 30
       },
       "all": {
         "visitors": 4,
-        "views": 29
+        "views": 30
       }
     }
   }
