@@ -1,23 +1,23 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-20T08:32:48.640864+00:00",
+  "updatedAt": "2026-11-21T08:17:37.692079+00:00",
   "sites": {
     "nadle": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       },
       "days7": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       },
       "days30": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       },
       "all": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 1
       }
     },
     "taxis-web": {
@@ -58,8 +58,8 @@
     },
     "sigma": {
       "today": {
-        "visitors": 3,
-        "views": 30
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 3,
@@ -193,11 +193,11 @@
       },
       "days30": {
         "visitors": 4,
-        "views": 30
+        "views": 31
       },
       "all": {
         "visitors": 4,
-        "views": 30
+        "views": 31
       }
     }
   }
