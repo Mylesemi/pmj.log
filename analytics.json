@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-22T10:05:26.013109+00:00",
+  "updatedAt": "2026-11-22T16:22:12.180222+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -44,16 +44,16 @@
         "views": 0
       },
       "days7": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 3,
+        "views": 17
       },
       "days30": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 3,
+        "views": 17
       },
       "all": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 3,
+        "views": 17
       }
     },
     "sigma": {
@@ -63,7 +63,7 @@
       },
       "days7": {
         "visitors": 4,
-        "views": 42
+        "views": 31
       },
       "days30": {
         "visitors": 4,
@@ -76,20 +76,20 @@
     },
     "character-adv": {
       "today": {
-        "visitors": 15,
-        "views": 32
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
-        "visitors": 15,
-        "views": 32
+        "visitors": 44,
+        "views": 104
       },
       "days30": {
-        "visitors": 15,
-        "views": 32
+        "visitors": 44,
+        "views": 104
       },
       "all": {
-        "visitors": 15,
-        "views": 32
+        "visitors": 44,
+        "views": 104
       }
     },
     "fam": {
@@ -116,16 +116,16 @@
         "views": 0
       },
       "days7": {
-        "visitors": 3,
-        "views": 5
+        "visitors": 4,
+        "views": 9
       },
       "days30": {
-        "visitors": 5,
-        "views": 8
+        "visitors": 6,
+        "views": 12
       },
       "all": {
-        "visitors": 5,
-        "views": 8
+        "visitors": 6,
+        "views": 12
       }
     },
     "udongjeon": {
@@ -170,8 +170,8 @@
         "views": 0
       },
       "days7": {
-        "visitors": 2,
-        "views": 4
+        "visitors": 0,
+        "views": 0
       },
       "days30": {
         "visitors": 3,
@@ -184,20 +184,20 @@
     },
     "pmj-log": {
       "today": {
-        "visitors": 2,
-        "views": 4
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
-        "visitors": 2,
-        "views": 12
+        "visitors": 3,
+        "views": 28
       },
       "days30": {
-        "visitors": 4,
-        "views": 35
+        "visitors": 5,
+        "views": 51
       },
       "all": {
-        "visitors": 4,
-        "views": 35
+        "visitors": 5,
+        "views": 51
       }
     }
   }
