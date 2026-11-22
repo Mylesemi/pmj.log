@@ -249,13 +249,17 @@
   }
 
   const publishedAnalytics = 'analytics.json';
-  const repositoryAnalytics = 'https://raw.githubusercontent.com/Mylesemi/pmj.log/refs/heads/main/analytics.json';
+  const repositoryAnalytics = 'https://api.github.com/repos/Mylesemi/pmj.log/contents/analytics.json?ref=main';
   const analyticsTime = (data) => Date.parse(data?.updatedAt) || 0;
 
   async function readAnalytics(url) {
     const response = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
     if (!response.ok) throw new Error(`Visitor statistics HTTP ${response.status}`);
-    const data = await response.json();
+    const payload = await response.json();
+    // GitHub's Contents API returns a base64-encoded file by default.
+    const data = payload?.encoding === 'base64'
+      ? JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(payload.content), (char) => char.charCodeAt(0))))
+      : payload;
     if (data?.status !== 'ok' || !analyticsTime(data) || !data.sites || typeof data.sites !== 'object' || Array.isArray(data.sites)) {
       throw new Error('Invalid visitor statistics');
     }
@@ -269,7 +273,7 @@
 
   function refreshAnalytics() {
     if (!analyticsRequest) {
-      analyticsRequest = readAnalytics(`${repositoryAnalytics}?t=${Date.now()}`)
+      analyticsRequest = readAnalytics(`${repositoryAnalytics}&t=${Date.now()}`)
         .finally(() => { analyticsRequest = null; });
     }
     return analyticsRequest;
