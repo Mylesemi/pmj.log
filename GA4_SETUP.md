@@ -93,7 +93,9 @@ GA4 속성 ID는 Repository Variable `GA4_PROPERTY_ID`에 `564297056`으로 설�
 
 ## 3. 데이터 갱신
 Actions > Update GA4 visitor statistics > Run workflow를 한 번 실행합니다.
-이후 매일 **10:17 한국시간(01:17 UTC)**에 `analytics.json`이 자동 갱신됩니다.
+이후 **매시 17분(한국시간)**에 `analytics.json`을 자동 갱신합니다.
+개인 보기의 **방문자 수 조회**와 **다시 조회**는 저장소에 마지막으로 집계된 통계를 표시합니다.
+새 집계는 조회창의 **GitHub에서 Run workflow** 링크를 통해 실행할 수 있습니다.
 워크플로는 갱신한 파일을 커밋한 뒤 GitHub Pages 빌드를 명시적으로 요청합니다.
 `GITHUB_TOKEN`으로 만든 커밋은 자체적으로 Pages 빌드를 시작하지 않기 때문입니다.
 빌드가 끝나면 pmj.log가 이 파일을 읽어 각 카드에 방문자 수를 표시합니다.
