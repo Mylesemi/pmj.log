@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-22T16:22:12.180222+00:00",
+  "updatedAt": "2026-11-22T22:30:28.568998+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -45,15 +45,15 @@
       },
       "days7": {
         "visitors": 3,
-        "views": 17
+        "views": 21
       },
       "days30": {
         "visitors": 3,
-        "views": 17
+        "views": 21
       },
       "all": {
         "visitors": 3,
-        "views": 17
+        "views": 21
       }
     },
     "sigma": {
@@ -80,16 +80,16 @@
         "views": 0
       },
       "days7": {
-        "visitors": 44,
-        "views": 104
+        "visitors": 45,
+        "views": 109
       },
       "days30": {
-        "visitors": 44,
-        "views": 104
+        "visitors": 45,
+        "views": 109
       },
       "all": {
-        "visitors": 44,
-        "views": 104
+        "visitors": 45,
+        "views": 109
       }
     },
     "fam": {
@@ -189,15 +189,15 @@
       },
       "days7": {
         "visitors": 3,
-        "views": 28
+        "views": 34
       },
       "days30": {
         "visitors": 5,
-        "views": 51
+        "views": 57
       },
       "all": {
         "visitors": 5,
-        "views": 51
+        "views": 57
       }
     }
   }
