@@ -23,7 +23,7 @@
         "공공데이터",
         "지도"
       ],
-      "url": "https://gongsa-map.vercel.app/?type=rail&source=utic",
+      "url": "https://gongsa-map.vercel.app/",
       "repo": "https://github.com/Mylesemi/gongsa-map",
       "date": "2026-11-17",
       "color": "#ea580c",
