@@ -56,6 +56,7 @@
   let items = [];
   let analytics = null;
   let analyticsRequest = null;
+  let visitorUpdateTimer = null;
   let activeVisitorId = null;
   let visitorRequestNumber = 0;
   const fmt = (n) => new Intl.NumberFormat('ko-KR').format(n);
@@ -247,18 +248,29 @@
     $('#featured').innerHTML = list.map(itemHTML).join('');
   }
 
+  const publishedAnalytics = 'analytics.json';
+  const repositoryAnalytics = 'https://raw.githubusercontent.com/Mylesemi/pmj.log/refs/heads/main/analytics.json';
+  const analyticsTime = (data) => Date.parse(data?.updatedAt) || 0;
+
+  async function readAnalytics(url) {
+    const response = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+    if (!response.ok) throw new Error(`Visitor statistics HTTP ${response.status}`);
+    const data = await response.json();
+    if (data?.status !== 'ok' || !analyticsTime(data) || !data.sites || typeof data.sites !== 'object' || Array.isArray(data.sites)) {
+      throw new Error('Invalid visitor statistics');
+    }
+    if (analyticsTime(data) >= analyticsTime(analytics)) {
+      analytics = data;
+      document.querySelectorAll('[data-visitor-count]').forEach((el) => {
+        el.innerHTML = visitorSummary(el.dataset.visitorCount);
+      });
+    }
+  }
+
   function refreshAnalytics() {
-    if (!IS_OWNER) return Promise.resolve();
     if (!analyticsRequest) {
-      analyticsRequest = (async () => {
-        const response = await fetch('analytics.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error(response.status);
-        const data = await response.json();
-        if (!data || typeof data !== 'object' || !data.sites || typeof data.sites !== 'object') {
-          throw new Error('Invalid visitor statistics');
-        }
-        analytics = data;
-      })().finally(() => { analyticsRequest = null; });
+      analyticsRequest = readAnalytics(`${repositoryAnalytics}?t=${Date.now()}`)
+        .finally(() => { analyticsRequest = null; });
     }
     return analyticsRequest;
   }
@@ -266,12 +278,10 @@
   async function loadAnalytics() {
     if (!IS_OWNER) return;
     try {
-      await refreshAnalytics();
+      await readAnalytics(publishedAnalytics);
     } catch (err) {
       console.warn('방문 통계를 불러오지 못했습니다.', err);
     }
-    renderGrid();
-    renderFeatured();
   }
 
   function renderVisitorDetails(id, failed = false) {
@@ -306,10 +316,7 @@
     refreshButton.textContent = '조회 중…';
     if (!dialog.open) dialog.showModal();
     try {
-      await refreshAnalytics();
-      document.querySelectorAll('[data-visitor-count]').forEach((el) => {
-        el.innerHTML = visitorSummary(el.dataset.visitorCount);
-      });
+      await refreshAnalytics().catch(() => readAnalytics(publishedAnalytics));
       if (request === visitorRequestNumber && dialog.open) renderVisitorDetails(id);
     } catch (err) {
       if (request === visitorRequestNumber && dialog.open) renderVisitorDetails(id, true);
@@ -319,6 +326,30 @@
         refreshButton.textContent = '다시 조회';
       }
     }
+  }
+
+  function watchForNewAnalytics() {
+    clearTimeout(visitorUpdateTimer);
+    const request = visitorRequestNumber;
+    const baseline = analyticsTime(analytics);
+    const deadline = Date.now() + 3 * 60 * 1000;
+
+    async function check() {
+      if (request !== visitorRequestNumber) return;
+      try {
+        await refreshAnalytics().catch(() => readAnalytics(publishedAnalytics));
+      } catch (err) {
+        // A temporary read failure can recover on the next check.
+      }
+      if (request !== visitorRequestNumber) return;
+      if (analyticsTime(analytics) > baseline) {
+        renderVisitorDetails(activeVisitorId);
+      } else if (Date.now() < deadline) {
+        visitorUpdateTimer = setTimeout(check, 10000);
+      }
+    }
+
+    visitorUpdateTimer = setTimeout(check, 10000);
   }
 
   function update() {
@@ -344,8 +375,10 @@
       queryVisitors(button.dataset.visitorId);
     });
     $('#visitor-refresh')?.addEventListener('click', () => queryVisitors(activeVisitorId));
+    $('#visitor-run-workflow')?.addEventListener('click', watchForNewAnalytics);
     $('#visitor-dialog')?.addEventListener('close', () => {
       visitorRequestNumber++;
+      clearTimeout(visitorUpdateTimer);
       const button = [...document.querySelectorAll('[data-visitor-id]')].find((el) => el.dataset.visitorId === activeVisitorId);
       button?.focus({ preventScroll: true });
     });
