@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-22T22:30:28.568998+00:00",
+  "updatedAt": "2026-11-23T03:44:55.488762+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -40,20 +40,20 @@
     },
     "storybeat": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 2
       },
       "days7": {
         "visitors": 3,
-        "views": 21
+        "views": 23
       },
       "days30": {
         "visitors": 3,
-        "views": 21
+        "views": 23
       },
       "all": {
         "visitors": 3,
-        "views": 21
+        "views": 23
       }
     },
     "sigma": {
@@ -76,20 +76,20 @@
     },
     "character-adv": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 2
       },
       "days7": {
         "visitors": 45,
-        "views": 109
+        "views": 111
       },
       "days30": {
         "visitors": 45,
-        "views": 109
+        "views": 111
       },
       "all": {
         "visitors": 45,
-        "views": 109
+        "views": 111
       }
     },
     "fam": {
@@ -184,20 +184,20 @@
     },
     "pmj-log": {
       "today": {
-        "visitors": 0,
-        "views": 0
+        "visitors": 1,
+        "views": 2
       },
       "days7": {
         "visitors": 3,
-        "views": 34
+        "views": 36
       },
       "days30": {
         "visitors": 5,
-        "views": 57
+        "views": 59
       },
       "all": {
         "visitors": 5,
-        "views": 57
+        "views": 59
       }
     }
   }
