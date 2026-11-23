@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-23T03:44:55.488762+00:00",
+  "updatedAt": "2026-11-23T14:50:50.393421+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -59,37 +59,37 @@
     "sigma": {
       "today": {
         "visitors": 0,
-        "views": 0
+        "views": 1
       },
       "days7": {
         "visitors": 4,
-        "views": 31
+        "views": 32
       },
       "days30": {
         "visitors": 4,
-        "views": 42
+        "views": 43
       },
       "all": {
         "visitors": 4,
-        "views": 42
+        "views": 43
       }
     },
     "character-adv": {
       "today": {
-        "visitors": 1,
-        "views": 2
+        "visitors": 4,
+        "views": 5
       },
       "days7": {
-        "visitors": 45,
-        "views": 111
+        "visitors": 48,
+        "views": 114
       },
       "days30": {
-        "visitors": 45,
-        "views": 111
+        "visitors": 48,
+        "views": 114
       },
       "all": {
-        "visitors": 45,
-        "views": 111
+        "visitors": 48,
+        "views": 114
       }
     },
     "fam": {
