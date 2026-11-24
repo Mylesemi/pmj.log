@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-24T13:53:42.185204+00:00",
+  "updatedAt": "2026-11-24T23:30:14.425159+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -40,8 +40,8 @@
     },
     "storybeat": {
       "today": {
-        "visitors": 1,
-        "views": 2
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 3,
@@ -76,8 +76,8 @@
     },
     "character-adv": {
       "today": {
-        "visitors": 2,
-        "views": 3
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 49,
@@ -184,8 +184,8 @@
     },
     "pmj-log": {
       "today": {
-        "visitors": 1,
-        "views": 2
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 3,
