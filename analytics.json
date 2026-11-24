@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-23T14:50:50.393421+00:00",
+  "updatedAt": "2026-11-24T02:17:26.474291+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -40,8 +40,8 @@
     },
     "storybeat": {
       "today": {
-        "visitors": 1,
-        "views": 2
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 3,
@@ -59,7 +59,7 @@
     "sigma": {
       "today": {
         "visitors": 0,
-        "views": 1
+        "views": 0
       },
       "days7": {
         "visitors": 4,
@@ -76,8 +76,8 @@
     },
     "character-adv": {
       "today": {
-        "visitors": 4,
-        "views": 5
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 48,
@@ -116,8 +116,8 @@
         "views": 0
       },
       "days7": {
-        "visitors": 4,
-        "views": 9
+        "visitors": 2,
+        "views": 4
       },
       "days30": {
         "visitors": 6,
@@ -184,12 +184,12 @@
     },
     "pmj-log": {
       "today": {
-        "visitors": 1,
-        "views": 2
+        "visitors": 0,
+        "views": 0
       },
       "days7": {
         "visitors": 3,
-        "views": 36
+        "views": 30
       },
       "days30": {
         "visitors": 5,
