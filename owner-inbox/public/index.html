@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>사용자 문의함 · PMJ.log</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="https://mylesemi.github.io/pmj.log/"><span aria-hidden="true">p</span>pmj.log</a>
+    <a href="https://mylesemi.github.io/pmj.log/">도구 목록으로</a>
+  </header>
+  <main>
+    <div class="heading">
+      <h1>사용자 문의함</h1>
+      <button type="button" id="refresh">다시 불러오기</button>
+    </div>
+    <div class="filters">
+      <label>서비스
+        <select id="source">
+          <option value="all">전체 서비스</option>
+          <option value="storybeat">StoryBeat</option>
+          <option value="character-adv">글자 탐험대</option>
+        </select>
+      </label>
+      <label>상태
+        <select id="state">
+          <option value="open">열린 문의</option>
+          <option value="closed">닫힌 문의</option>
+          <option value="all">전체 문의</option>
+        </select>
+      </label>
+    </div>
+    <p id="status" class="status" role="status" aria-live="polite">문의 불러오는 중…</p>
+    <div id="entries" class="entries"></div>
+    <aside>
+      <span>GitHub에서 전체 기록 보기</span>
+      <a href="https://github.com/Mylesemi/storybeat/issues" target="_blank" rel="noopener noreferrer">StoryBeat</a>
+      <a href="https://github.com/Mylesemi/character-adv/issues" target="_blank" rel="noopener noreferrer">글자 탐험대</a>
+    </aside>
+  </main>
+</body>
+</html>
