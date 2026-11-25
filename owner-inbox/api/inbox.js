@@ -13,7 +13,7 @@ async function fetchSource({ id, url, token }) {
   });
   if (!response.ok) throw new Error(`Inquiry inbox returned HTTP ${response.status}`);
   const data = await response.json();
-  if (!Array.isArray(data.items) || typeof data.updatedAt !== 'string') {
+  if (!Array.isArray(data.items) || (data.updatedAt !== null && typeof data.updatedAt !== 'string')) {
     throw new Error('Invalid inquiry inbox response');
   }
   return { id, ...data };
