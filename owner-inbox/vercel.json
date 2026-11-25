@@ -1,4 +1,5 @@
 {
+  "buildCommand": "node scripts/check-inbox.mjs",
   "outputDirectory": "public",
   "headers": [
     {

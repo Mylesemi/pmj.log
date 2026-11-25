@@ -11,7 +11,7 @@ async function fetchSource({ id, url, token }) {
     redirect: 'error',
     signal: AbortSignal.timeout(6000),
   });
-  if (!response.ok) throw new Error('Inquiry inbox is unavailable');
+  if (!response.ok) throw new Error(`Inquiry inbox returned HTTP ${response.status}`);
   const data = await response.json();
   if (!Array.isArray(data.items) || typeof data.updatedAt !== 'string') {
     throw new Error('Invalid inquiry inbox response');
@@ -21,17 +21,22 @@ async function fetchSource({ id, url, token }) {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store');
-  // This deployment's preview URL is protected by Vercel Authentication.
-  // A production alias must never serve inquiry data.
-  if (process.env.VERCEL_ENV !== 'preview') return res.status(404).json({ error: 'not_found' });
+  // This flag is scoped to authenticated previews in the Vercel project.
+  // Keep the data endpoint disabled on production and unconfigured deployments.
+  if (process.env.PMJ_INBOX_ENABLED !== '1' || process.env.VERCEL_ENV === 'production') {
+    return res.status(404).json({ error: 'not_found' });
+  }
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
     return res.status(405).json({ error: 'method' });
   }
 
   const results = await Promise.allSettled(sources.map(fetchSource));
-  const inboxes = results.map((result, index) => result.status === 'fulfilled'
-    ? result.value
-    : { id: sources[index].id, unavailable: true });
+  const inboxes = results.map((result, index) => {
+    if (result.status === 'fulfilled') return result.value;
+    const { id } = sources[index];
+    console.warn('PMJ inbox source unavailable:', id);
+    return { id, unavailable: true };
+  });
   return res.status(200).json({ inboxes });
 }

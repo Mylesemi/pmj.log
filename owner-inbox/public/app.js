@@ -46,13 +46,17 @@ function row(item) {
 
 function render() {
   const active = inboxes.filter(({ id }) => Object.hasOwn(services, id) && (source.value === 'all' || source.value === id));
-  const issues = active.flatMap(({ id, items }) => (items ?? []).filter(item => Number.isSafeInteger(item.number) && item.number > 0)
-    .map(item => ({ ...item, service: id })))
-    .filter(item => state.value === 'all' || item.state === state.value)
+  const allIssues = active.flatMap(({ id, items }) => (items ?? []).filter(item => Number.isSafeInteger(item.number) && item.number > 0)
+    .map(item => ({ ...item, service: id })));
+  const issues = allIssues.filter(item => state.value === 'all' || item.state === state.value)
     .sort((a, b) => Date.parse(b.submittedAt) - Date.parse(a.submittedAt));
   const unavailable = active.filter(item => item.unavailable).map(item => services[item.id].name);
   const syncTimes = active.map(item => Date.parse(item.updatedAt)).filter(Number.isFinite);
-  const heading = issues.length ? `${issues.length}건` : '해당 상태의 문의가 없습니다.';
+  const heading = issues.length
+    ? `${issues.length}건`
+    : allIssues.length
+      ? `선택한 상태의 문의가 없습니다. 전체 문의는 ${allIssues.length}건입니다.`
+      : '아직 접수된 문의가 없습니다.';
   status.textContent = [
     active.some(item => !item.unavailable) ? heading : '',
     unavailable.length ? `${unavailable.join(', ')} 문의를 불러오지 못했습니다.` : '',
