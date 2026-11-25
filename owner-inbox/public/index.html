@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow,noarchive">
   <title>사용자 문의함 · PMJ.log</title>
   <link rel="stylesheet" href="/style.css">
-  <script src="/app.js?v=20261125-3" type="module"></script>
+  <script src="/app.js?v=20261125-4" type="module"></script>
 </head>
 <body>
   <header class="topbar">
@@ -17,6 +17,11 @@
     <div class="heading">
       <h1>사용자 문의함</h1>
       <button type="button" id="refresh">다시 불러오기</button>
+    </div>
+    <p id="sync-status" class="status" role="status" aria-live="polite" hidden></p>
+    <div id="github-connect-panel" hidden>
+      <p>처음 한 번만 GitHub를 연결해 주세요. 설치 화면에서 <strong>Only select repositories</strong>를 고르고 <code>storybeat</code>와 <code>character-adv</code>를 선택합니다.</p>
+      <button type="button" id="github-connect">GitHub 연결</button>
     </div>
     <div class="filters">
       <label>서비스

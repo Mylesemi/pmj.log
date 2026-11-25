@@ -1,5 +1,8 @@
 {
   "name": "pmj-inquiry-inbox",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@vercel/blob": "2.9.0"
+  }
 }

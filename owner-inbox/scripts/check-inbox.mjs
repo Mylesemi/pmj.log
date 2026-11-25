@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import handler from '../api/inbox.js';
+import { githubStorageReady, readGithubApp } from '../lib/github-app-store.js';
 
 if (process.env.PMJ_INBOX_ENABLED !== '1') {
   // Public production deployments have no reader credentials or inbox data.
@@ -21,6 +22,9 @@ const res = {
 
 await handler({ method: 'GET' }, res);
 assert.equal(res.statusCode, 200, 'The private inbox route must be enabled');
+assert.ok(githubStorageReady(), 'GitHub App storage must be available');
+await readGithubApp();
+console.log('Verified private GitHub App storage');
 console.log(`Vercel preview indicator: ${process.env.VERCEL_ENV === 'preview' ? 'present' : 'unavailable'}`);
 const expected = ['storybeat', 'character-adv'];
 assert.deepEqual(res.body.inboxes.map(({ id }) => id), expected);
