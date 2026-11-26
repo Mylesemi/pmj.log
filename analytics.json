@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-26T12:47:58.372032+00:00",
+  "updatedAt": "2026-11-26T22:24:43.550758+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -62,8 +62,8 @@
         "views": 0
       },
       "days7": {
-        "visitors": 4,
-        "views": 36
+        "visitors": 2,
+        "views": 6
       },
       "days30": {
         "visitors": 4,
@@ -77,7 +77,7 @@
     "character-adv": {
       "today": {
         "visitors": 0,
-        "views": 1
+        "views": 0
       },
       "days7": {
         "visitors": 49,
@@ -185,11 +185,11 @@
     "pmj-log": {
       "today": {
         "visitors": 0,
-        "views": 1
+        "views": 0
       },
       "days7": {
         "visitors": 3,
-        "views": 50
+        "views": 49
       },
       "days30": {
         "visitors": 5,
