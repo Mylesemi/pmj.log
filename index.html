@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/style.css?v=20261128">
+  <link rel="stylesheet" href="assets/style.css?v=20261128-2">
   <link rel="icon" href="assets/plog.svg"><rect width='32' height='32' rx='8' fill='%23201c1a'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='%23f5b971' font-family='sans-serif' font-weight='700'>p</text></svg>">
   <script>
     // 첫 렌더 전에 저장된 테마 적용 (깜빡임 방지)
@@ -38,7 +38,7 @@
 <body data-src="projects.json" data-view="cards" data-group="category">
   <header class="topbar">
     <div class="container topbar-inner">
-      <a class="logo" href="./"><span class="logo-mark" aria-hidden="true">🐸</span>plog</a>
+      <a class="logo" href="./"><img class="logo-mark" src="assets/plog.svg" alt="">plog</a>
       <nav class="site-nav" aria-label="페이지">
         <a href="./" aria-current="page">Tool·자료</a>
         <a href="library.html">책·영화</a>
@@ -62,7 +62,7 @@
         <h1 id="hero-title" class="hero-title"></h1>
         <p id="stats" class="hero-stats" aria-live="polite"></p>
       </div>
-      <div class="hero-side">
+      <div class="hero-side"><img class="hero-mascot" src="assets/plog.svg" alt="플로그">
         <p id="hero-tagline"></p>
         <div id="profile-links" class="hero-links"></div>
         <div class="hero-links" data-owner-only hidden>
@@ -100,7 +100,7 @@
       </section>
       <p id="result-count" class="result-count"></p>
       <div id="grid" class="groups" aria-live="polite"></div>
-      <div id="empty" class="empty" hidden>
+      <div id="empty" class="empty" hidden><img class="empty-mascot" src="assets/plog-think.svg" alt="">
         <p>조건에 맞는 항목이 없어요.</p>
         <button id="reset" type="button" class="btn">필터 초기화</button>
       </div>
