@@ -362,3 +362,13 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 .owner-controls { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .owner-exit { padding: 4px 0; background: none; border: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+/* plog brand */
+:root { --accent:#426b19; --radius:18px; }
+:root[data-theme="light"] { --bg:#fcfcf4; --surface:#fff; --surface-2:#edf2df; --text:#193d09; --text-2:#526749; --border:#dce6cd; }
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fcfcf4;--surface:#fff;--surface-2:#edf2df;--text:#193d09;--text-2:#526749;--border:#dce6cd;}}
+.topbar,.hero {--ink:#193d09;--ink-2:#426b19;--ink-3:#526749;--gold:#426b19;--line:#dce6cd;background:#fcfcf4;}
+.hero {background:linear-gradient(135deg,#fcfcf4,#eaf4d4);}
+.logo {font-size:25px;letter-spacing:-.04em;}.logo-mark{background:transparent;width:36px;height:36px;font-size:26px;}.tabs{flex-wrap:wrap;max-width:100%;}.site-nav a[aria-current="page"]{background:#e4efce;}.card{border-radius:18px;}.tab[aria-selected="true"]{background:#dceeb7;color:#193d09;}
+:root[data-theme="dark"]{--accent:#a8dc40;}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#a8dc40;}}
