@@ -440,12 +440,14 @@
       const res = await fetch(DATA_SRC, { cache: 'no-cache' });
       if (!res.ok) throw new Error(res.status);
       const data = await res.json();
+      $('#loading').hidden = true;
       setCategories(Array.isArray(data.categories) && data.categories.length ? data.categories : DEFAULT_CATEGORIES);
       items = (data.items || []).filter((i) => i && i.title && i.url);
       renderProfile(data.profile);
       const updated = items.map((i) => i.date || '').sort().pop();
       if (updated) $('#updated').textContent = `마지막 업데이트 ${updated.replaceAll('-', '.')}`;
     } catch (err) {
+      $('#loading').hidden = true;
       $('#grid').innerHTML = `<p class="empty">${esc(DATA_SRC)}을 불러오지 못했어요. 로컬에서는 <code>python -m http.server</code>로 서버를 띄워 열어주세요.</p>`;
       console.error(err);
       return;
