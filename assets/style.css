@@ -372,3 +372,5 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 .logo {font-size:25px;letter-spacing:-.04em;}.logo-mark{background:transparent;width:36px;height:36px;font-size:26px;}.tabs{flex-wrap:wrap;max-width:100%;}.site-nav a[aria-current="page"]{background:#e4efce;}.card{border-radius:18px;}.tab[aria-selected="true"]{background:#dceeb7;color:#193d09;}
 :root[data-theme="dark"]{--accent:#a8dc40;}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--accent:#a8dc40;}}
+
+.logo-mark{object-fit:contain}.hero-side{position:relative}.hero-mascot{display:block;width:clamp(90px,15vw,150px);height:auto;margin:0 auto 8px}.empty-mascot{display:block;width:90px;margin:0 auto 12px}.hero-side:has(.hero-mascot) #hero-tagline:empty{display:none}.hero-title{font-size:clamp(28px,5vw,50px)}@media(max-width:859px){.hero-inner{grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}.hero-mascot{width:84px}.hero{padding:28px 0}.hero-side .hero-links{justify-content:center}}@media(max-width:420px){.hero-title{font-size:28px}.hero-mascot{width:64px}}
