@@ -1,12 +1,12 @@
 {
   "profile": {
-    "name": "pmj.log",
-    "eyebrow": "PMJ.LOG · BUILD & SHARE",
+    "name": "plog",
+    "eyebrow": "Small Ideas, Big Leaps.",
     "headline": [
-      "함께 만들고",
-      "나누는 지식"
+      "호기심에서 시작된",
+      "작은 도약"
     ],
-    "tagline": "필요해서 직접 만든 도구, 그리고 만들며 참고한 사이트.",
+    "tagline": "호기심과 아이디어를 현실로 만드는 공간.",
     "github": "https://github.com/Mylesemi",
     "email": "",
     "links": []
@@ -16,7 +16,7 @@
       "id": "gongsa-map",
       "title": "여기공사 · 전국 공사 지도",
       "description": "공개된 공사·개발 사업과 도로 통제 정보를 지도와 목록으로 확인해요.",
-      "category": "tool",
+      "category": "life",
       "tags": [
         "공사",
         "도로 통제",
@@ -34,7 +34,7 @@
       "id": "land-scout",
       "title": "LAND SCOUT · 공매 토지·주택 탐색",
       "description": "온비드 공매 토지·주택을 예산에 맞춰 찾고 물건 정보와 지도 위치를 확인해요.",
-      "category": "tool",
+      "category": "finance",
       "tags": [
         "공매",
         "토지",
@@ -52,7 +52,7 @@
       "id": "nadle",
       "title": "NADLE · 아이와 함께하는 나들이 탐색",
       "description": "아이와 갈 만한 공공시설을 찾고 예약 현황을 확인하는 가족 나들이 서비스.",
-      "category": "tool",
+      "category": "life",
       "tags": [
         "육아",
         "나들이",
@@ -69,7 +69,7 @@
       "id": "taxis-web",
       "title": "TAXIS 2026 · 절세 시뮬레이터",
       "description": "연말정산 9단계를 따라가며 부부 합산 절세액을 계산해요.",
-      "category": "tool",
+      "category": "finance",
       "tags": [
         "세금",
         "연말정산",
@@ -93,7 +93,7 @@
       "id": "storybeat",
       "title": "StoryGlow · 아이용 영어 그림책 따라 읽기",
       "description": "읽는 소리에 맞춰 단어가 하나씩 빛나는 영어 그림책.",
-      "category": "tool",
+      "category": "education",
       "tags": [
         "영어",
         "교육",
@@ -110,7 +110,7 @@
       "id": "sigma",
       "title": "SIGMA · 글로벌 시장 지표 대시보드",
       "description": "환율·원자재·주가·금리를 한 화면에서.",
-      "category": "tool",
+      "category": "finance",
       "tags": [
         "투자",
         "대시보드",
@@ -127,7 +127,7 @@
       "id": "character-adv",
       "title": "글자 탐험대 · 5세 한글 모험 게임",
       "description": "손글씨로 글자를 쓰며 이야기를 완성하는 한글 게임.",
-      "category": "tool",
+      "category": "education",
       "tags": [
         "한글",
         "교육",
@@ -144,7 +144,7 @@
       "id": "fam",
       "title": "FAM · 우리 가족 탐험 지도",
       "description": "가족이 다녀온 곳을 지도 위 발자국으로 모아요.",
-      "category": "tool",
+      "category": "life",
       "tags": [
         "지도",
         "여행",
@@ -160,7 +160,7 @@
       "id": "dedu",
       "title": "DEDU · 사진·영상 중복 정리",
       "description": "중복 사진·영상을 찾아 휴지통으로. Windows용.",
-      "category": "tool",
+      "category": "life",
       "tags": [
         "Windows",
         "Python",
@@ -176,7 +176,7 @@
       "id": "dodgepoop",
       "title": "똥피하기 · 실시간 아케이드 게임",
       "description": "떨어지는 똥을 피해 끝까지 살아남기. 최대 6인 실시간 대결.",
-      "category": "tool",
+      "category": "game",
       "tags": [
         "게임",
         "멀티플레이",
@@ -192,7 +192,7 @@
       "id": "udongjeon",
       "title": "우동전 · 우리 동네 전쟁",
       "description": "가장 살기 좋은 동네를 만드는 2~4인 도시개발 보드게임.",
-      "category": "tool",
+      "category": "game",
       "tags": [
         "게임",
         "보드게임",
@@ -208,7 +208,7 @@
       "id": "6cc",
       "title": "육크크 · 공동육아 커뮤니티",
       "description": "동네 부모들과 함께하는 공동육아 모임과 놀이 미션.",
-      "category": "tool",
+      "category": "life",
       "tags": [
         "육아",
         "커뮤니티",
@@ -253,18 +253,40 @@
   ],
   "categories": [
     {
-      "key": "tool",
-      "label": "Tool",
-      "badge": "TOOL",
-      "unit": "개",
-      "description": "직접 만든 도구"
+      "key": "life",
+      "label": "생활",
+      "badge": "생활",
+      "unit": "개"
+    },
+    {
+      "key": "education",
+      "label": "교육",
+      "badge": "교육",
+      "unit": "개"
+    },
+    {
+      "key": "finance",
+      "label": "금융",
+      "badge": "금융",
+      "unit": "개"
+    },
+    {
+      "key": "game",
+      "label": "게임",
+      "badge": "게임",
+      "unit": "개"
+    },
+    {
+      "key": "lab",
+      "label": "실험실",
+      "badge": "실험실",
+      "unit": "개"
     },
     {
       "key": "reference",
-      "label": "참고 사이트",
-      "badge": "PICK",
-      "unit": "곳",
-      "description": "curated by MJ"
+      "label": "참고 자료",
+      "badge": "참고 자료",
+      "unit": "개"
     }
   ]
 }
