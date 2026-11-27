@@ -101,7 +101,9 @@
 
   function renderStats() {
     const n = (cat) => items.filter((i) => i.category === cat).length;
-    $('#stats').innerHTML = CATEGORIES.filter((c) => c.key !== 'all' && n(c.key) > 0)
+    const stats = $('#stats');
+    if (!stats) return;
+    stats.innerHTML = CATEGORIES.filter((c) => c.key !== 'all' && n(c.key) > 0)
       .map((c) => `<span>${esc(c.label)} <b>${n(c.key)}</b>${esc(c.unit || '개')}</span>`).join('<i aria-hidden="true">·</i>');
   }
 

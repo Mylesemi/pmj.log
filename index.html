@@ -20,7 +20,7 @@
   <meta property="og:title" content="plog · 호기심을 구체적인 결과로">
   <meta property="og:description" content="호기심과 아이디어를 구체적인 결과로 만드는 개인의 실험실.">
   <meta property="og:url" content="https://mylesemi.github.io/pmj.log/">
-  <meta property="og:image" content="https://mylesemi.github.io/pmj.log/assets/og-tools.png">
+  <meta property="og:image" content="https://mylesemi.github.io/pmj.log/assets/og-tools-plog.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -28,8 +28,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <link rel="stylesheet" href="assets/style.css?v=20261128-plog3">
-  <link rel="icon" type="image/svg+xml" href="assets/plog-icon.svg">
+  <link rel="stylesheet" href="assets/style.css?v=20261128-brand">
+  <link rel="icon" type="image/png" href="assets/plog-mark.png">
   <script>
     // 첫 렌더 전에 저장된 테마 적용 (깜빡임 방지)
     try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
@@ -38,7 +38,7 @@
 <body data-src="projects.json" data-view="cards" data-group="category">
   <header class="topbar">
     <div class="container topbar-inner">
-      <a class="logo" href="./"><img class="logo-mark" src="assets/plog.svg" alt="">plog</a>
+      <a class="logo" href="./"><img class="logo-mark" src="assets/plog-mark.png" width="40" height="40" alt="">plog</a>
       <nav class="site-nav" aria-label="페이지">
         <a href="./" aria-current="page">Tool·자료</a>
         <a href="library.html">책·영화</a>
@@ -60,10 +60,10 @@
       <div>
         <p id="hero-eyebrow" class="eyebrow"></p>
         <h1 id="hero-title" class="hero-title"></h1>
-        <p id="stats" class="hero-stats" aria-live="polite"></p>
+        <p id="hero-tagline" class="hero-description"></p>
+        <p class="hero-slogan" lang="en">Small Ideas, Big Leaps.</p>
       </div>
-      <div class="hero-side"><img class="hero-mascot" src="assets/plog.svg" alt="플로그">
-        <p id="hero-tagline"></p>
+      <div class="hero-side"><img class="hero-mascot" src="assets/plog-mascot.webp" alt="둥근 안경을 쓴 개구리 플로그(Plog)">
         <div id="profile-links" class="hero-links"></div>
         <div class="hero-links" data-owner-only hidden>
           <a href="https://pmj-inbox-semimirr-3887.vercel.app/" rel="noreferrer">사용자 문의함 <span aria-hidden="true">↗</span></a>
@@ -99,9 +99,9 @@
         <div id="featured" class="grid"></div>
       </section>
       <p id="result-count" class="result-count"></p>
-      <div id="loading" class="loading" role="status"><img src="assets/plog.svg" alt="">plog가 목록을 불러오고 있어요.</div>
+      <div id="loading" class="loading" role="status"><img src="assets/plog-loading.webp" alt="">plog가 목록을 불러오고 있어요.</div>
       <div id="grid" class="groups" aria-live="polite"></div>
-      <div id="empty" class="empty" hidden><img class="empty-mascot" src="assets/plog-think.svg" alt="">
+      <div id="empty" class="empty" hidden><img class="empty-mascot" src="assets/plog-thinking.webp" alt="">
         <p>조건에 맞는 항목이 없어요.</p>
         <button id="reset" type="button" class="btn">필터 초기화</button>
       </div>
@@ -135,6 +135,6 @@
     </div>
   </dialog>
 
-  <script src="assets/app.js?v=20261128-plog3"></script>
+  <script src="assets/app.js?v=20261128-brand"></script>
 </body>
 </html>

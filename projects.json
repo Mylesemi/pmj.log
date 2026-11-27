@@ -5,7 +5,7 @@
     "headline": [
       "호기심을 구체적인 결과로."
     ],
-    "tagline": "PM의 기록이자, 아이디어를 실현하는 개인의 실험실.",
+    "tagline": "호기심에서 출발한 아이디어를 도구와 실험으로 만들어 가는 개인의 공간입니다.",
     "github": "https://github.com/Mylesemi",
     "email": "",
     "links": []
@@ -218,6 +218,21 @@
       "color": "#0d9488",
       "icon": "users",
       "kind": "커뮤니티"
+    },
+    {
+      "id": "movi",
+      "title": "MOVI · 가족 모션 게임",
+      "description": "카메라로 몸의 움직임을 인식하는 가족용 모션 게임 실험입니다.",
+      "category": "lab",
+      "tags": [
+        "모션 인식",
+        "카메라",
+        "가족"
+      ],
+      "url": "https://mylesemi.github.io/movi/",
+      "repo": "https://github.com/Mylesemi/movi",
+      "icon": "gamepad",
+      "kind": "프로토타입"
     },
     {
       "id": "getdesign",

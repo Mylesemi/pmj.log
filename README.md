@@ -1,6 +1,8 @@
-# pmj.log
+# plog
 
-직접 만든 Tool과 HTML 자료를 한 페이지에 모아 보여주는 GitHub Pages 사이트입니다.
+호기심에서 출발한 아이디어를 도구와 실험으로 만들어 가는 개인의 공간입니다.
+
+**Small Ideas, Big Leaps.** · [plog](https://mylesemi.github.io/pmj.log/)
 빌드 도구 없이 `projects.json`만 수정하면 페이지에 반영돼요.
 
 ## 항목 추가하기
@@ -13,7 +15,7 @@
   "id": "my-tool",
   "title": "제목",
   "description": "한두 줄 설명",
-  "category": "tool",
+  "category": "life",
   "tags": ["AI", "자동화"],
   "url": "created_by_mj/my-tool.html",
   "repo": "https://github.com/USERNAME/my-tool",
@@ -25,7 +27,7 @@
 | 필드 | 필수 | 설명 |
 |---|---|---|
 | `title`, `url` | ✅ | 없으면 표시되지 않음. `url`은 상대경로(로컬) 또는 `https://...`(외부) |
-| `category` | ✅ | `tool` 또는 `reference`(참고 사이트) |
+| `category` | ✅ | `life`, `education`, `finance`, `game`, `lab`, `reference` |
 | `description`, `tags`, `date` | | 검색·필터·정렬에 사용. `date`는 `YYYY-MM-DD` |
 | `repo` | | 개인 보기에서 "소스코드" 버튼 표시 |
 | `color` | | 카드 고유 색 (예: `"#1d4ed8"`). 없으면 카테고리 색 |
@@ -38,7 +40,7 @@
 
 | 필드 | 설명 |
 |---|---|
-| `eyebrow` | 제목 위 작은 영문 라벨 (예: `PMJ.LOG · TOOLS & NOTES`) |
+| `eyebrow` | 제목 위 작은 영문 라벨 (예: `Personal Lab of Growth`) |
 | `headline` | 큰 제목 2줄. 두 번째 줄은 강조색으로 표시 |
 | `tagline` | 오른쪽 소개 문장 |
 | `github`, `email`, `links` | 소개 아래 링크. `links: [{"label": "...", "url": "..."}]` |

@@ -442,3 +442,54 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
   .topbar-inner { gap: 8px; }
   .site-nav a { padding: 6px 8px; }
 }
+
+/* The directory keeps the filters and service cards in one visual hierarchy. */
+.hero-description {
+  max-width: 33rem;
+  margin: 14px 0 0;
+  color: var(--text-2);
+  font-size: clamp(14px, 2vw, 17px);
+}
+.hero-slogan {
+  width: fit-content;
+  margin: 20px 0 0;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+body[data-view="cards"] .hero {
+  background: radial-gradient(ellipse at 78% 55%, rgb(168 220 64 / 29%), transparent 40%),
+              linear-gradient(135deg, var(--bg), var(--surface-2));
+}
+.logo-mark { border: 1px solid var(--border); border-radius: 12px; }
+.tabs { max-width: 100%; overflow-x: auto; }
+.tab[aria-selected="true"] {
+  background: var(--accent);
+  color: var(--bg);
+}
+.tab[aria-selected="true"] .count { color: inherit; }
+.card { --c: var(--tool); box-shadow: 0 1px 3px rgb(30 70 23 / 5%); }
+.card:hover, .card:focus-within { box-shadow: var(--shadow-hover); }
+.card[data-cat="education"] .card-tile { background: color-mix(in srgb, #d4de9d 38%, var(--surface)); }
+.card[data-cat="finance"] .card-tile { background: color-mix(in srgb, #9ccbaf 34%, var(--surface)); }
+.card[data-cat="game"] .card-tile { background: color-mix(in srgb, #d6e780 38%, var(--surface)); }
+.card[data-cat="lab"] .card-tile { background: color-mix(in srgb, #cdd8b1 46%, var(--surface)); }
+.card[data-cat="reference"] .card-tile { background: color-mix(in srgb, #dccfa0 26%, var(--surface)); }
+.card-foot { border-top-style: solid; }
+.card-title a:focus-visible::after { outline: 2px solid var(--accent); outline-offset: -3px; border-radius: var(--radius); }
+.card-link { min-height: 32px; }
+.site-footer .container { border-top: 1px solid var(--border); padding-top: 16px; }
+
+@media (max-width: 420px) {
+  .hero-description { margin-top: 10px; }
+  .hero-slogan { margin-top: 14px; font-size: 12px; }
+}
+
+@media (max-width: 560px) {
+  .tabs { flex-wrap: wrap; }
+  .tab { flex: 0 0 auto; padding-inline: 9px; }
+}
