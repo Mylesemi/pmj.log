@@ -87,7 +87,7 @@
 
   /* ---------- Hero ---------- */
   function renderProfile(profile = {}) {
-    if (profile.name) document.title = profile.name === 'pmj.log' ? 'pmj.log' : `${profile.name} · pmj.log`;
+    if (profile.name) document.title = profile.name === 'plog' ? 'plog' : `${profile.name} · plog`;
     $('#hero-eyebrow').textContent = profile.eyebrow || '';
     const lines = profile.headline || [profile.name || ''];
     $('#hero-title').innerHTML = lines.map((l, i) => `<span${i ? ' class="accent"' : ''}>${esc(l)}</span>`).join('');
@@ -164,7 +164,7 @@
     // 항목별 color가 있으면 그 색으로, 없으면 카테고리 색으로 카드를 칠한다
     const color = /^#[0-9a-f]{3,8}$/i.test(item.color || '') ? ` style="--c:${item.color}"` : '';
     const tags = (item.tags || []).map((t) => `<span>#${esc(t)}</span>`).join('');
-    const stats = IS_OWNER && item.category === 'tool' && /^https?:/.test(item.url) && !item.url.includes('github.com/')
+    const stats = IS_OWNER && ['tool','life','education','finance','game','lab'].includes(item.category) && /^https?:/.test(item.url) && !item.url.includes('github.com/')
       ? `<div class="visitor-stat" aria-label="최근 30일 방문 통계"><span data-visitor-count="${esc(item.id)}">${visitorSummary(item.id)}</span><button class="visitor-query-btn" type="button" data-visitor-id="${esc(item.id)}" aria-label="${esc(item.title)} 방문자 수 조회" aria-haspopup="dialog" aria-controls="visitor-dialog">방문자 수 조회</button></div>` : '';
     const repo = IS_OWNER && item.repo ? `<a class="card-link sub" href="${esc(item.repo)}" target="_blank" rel="noopener">${ICONS.code}소스코드</a>` : '';
     // 추가 링크 (예: 오프라인 버전, 다운로드)
