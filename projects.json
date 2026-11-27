@@ -1,12 +1,11 @@
 {
   "profile": {
     "name": "plog",
-    "eyebrow": "Small Ideas, Big Leaps.",
+    "eyebrow": "",
     "headline": [
-      "호기심에서 시작된",
-      "작은 도약"
+      "Small Ideas, Big Leaps."
     ],
-    "tagline": "호기심과 아이디어를 현실로 만드는 공간.",
+    "tagline": "",
     "github": "https://github.com/Mylesemi",
     "email": "",
     "links": []
