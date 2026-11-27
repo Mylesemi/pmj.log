@@ -1,6 +1,6 @@
 {
   "status": "ok",
-  "updatedAt": "2026-11-27T05:06:50.576200+00:00",
+  "updatedAt": "2026-11-27T15:13:25.385513+00:00",
   "sites": {
     "nadle": {
       "today": {
@@ -9,7 +9,7 @@
       },
       "days7": {
         "visitors": 1,
-        "views": 4
+        "views": 3
       },
       "days30": {
         "visitors": 1,
@@ -62,8 +62,8 @@
         "views": 0
       },
       "days7": {
-        "visitors": 2,
-        "views": 6
+        "visitors": 1,
+        "views": 5
       },
       "days30": {
         "visitors": 4,
@@ -81,15 +81,15 @@
       },
       "days7": {
         "visitors": 49,
-        "views": 126
+        "views": 129
       },
       "days30": {
         "visitors": 49,
-        "views": 126
+        "views": 129
       },
       "all": {
         "visitors": 49,
-        "views": 126
+        "views": 129
       }
     },
     "fam": {
@@ -117,15 +117,15 @@
       },
       "days7": {
         "visitors": 3,
-        "views": 6
+        "views": 9
       },
       "days30": {
         "visitors": 7,
-        "views": 14
+        "views": 17
       },
       "all": {
         "visitors": 7,
-        "views": 14
+        "views": 17
       }
     },
     "udongjeon": {
@@ -193,11 +193,11 @@
       },
       "days30": {
         "visitors": 5,
-        "views": 79
+        "views": 80
       },
       "all": {
         "visitors": 5,
-        "views": 79
+        "views": 80
       }
     }
   }
