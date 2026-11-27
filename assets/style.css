@@ -165,6 +165,14 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
   letter-spacing: .08em; color: var(--accent); white-space: nowrap;
 }
 .group-head.is-category::after { order: 2; }
+.group-mascot {
+  order: 4;
+  align-self: center;
+  flex: 0 0 auto;
+  width: clamp(40px, 6vw, 52px);
+  height: 42px;
+  object-fit: contain;
+}
 .card[data-cat="reference"] { --c: var(--accent); }
 
 /* ---------- Cards (Tool·자료) ---------- */
@@ -334,6 +342,8 @@ select { height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid v
 /* Browser-specific personal view controls. Public pages keep these hidden. */
 [hidden] { display: none !important; }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.footer-brand { display: inline-flex; align-items: center; gap: 8px; }
+.footer-mascot { flex: 0 0 auto; width: 36px; height: 30px; object-fit: contain; }
 .owner-controls { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .owner-exit { padding: 4px 0; background: none; border: 0; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 

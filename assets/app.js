@@ -11,6 +11,13 @@
     { key: 'tool', label: 'Tool', badge: 'TOOL', unit: '개' },
     { key: 'material', label: '자료', badge: 'NOTE', unit: '개' },
   ];
+  const CATEGORY_POSES = new Map([
+    ['life', 'wave'],
+    ['education', 'reading'],
+    ['finance', 'thinking'],
+    ['game', 'jump'],
+    ['lab', 'working'],
+  ]);
   let CATEGORIES = [];
   let CATEGORY_LABEL = {};
   function setCategories(list) {
@@ -231,9 +238,20 @@
     const list = filtered();
     const groups = groupItems(list);
     const showHeads = GROUP === 'category' || groups.length > 1; // 카테고리 설명은 하나만 있어도 보여준다
-    const head = (key, group) => (typeof key === 'object' && key
-      ? `<h2 class="group-head is-category"><span>${esc(key.label)}</span><small>${group.length}${esc(key.unit || '개')}</small>${key.description ? `<em>${esc(key.description)}</em>` : ''}</h2>`
-      : `<h2 class="group-head"><span>${esc(key)}</span><small>${group.length}${esc(unitOf(group))}</small></h2>`);
+    const head = (key, group) => {
+      if (!key || typeof key !== 'object') {
+        return `<h2 class="group-head"><span>${esc(key)}</span><small>${group.length}${esc(unitOf(group))}</small></h2>`;
+      }
+      const pose = CATEGORY_POSES.get(key.key);
+      const mascot = pose
+        ? `<img class="group-mascot" src="assets/plog-${pose}.webp" width="52" height="44" loading="lazy" decoding="async" alt="">`
+        : '';
+      return `<h2 class="group-head is-category">
+        <span>${esc(key.label)}</span><small>${group.length}${esc(key.unit || '개')}</small>
+        ${key.description ? `<em>${esc(key.description)}</em>` : ''}
+        ${mascot}
+      </h2>`;
+    };
     $('#grid').innerHTML = groups.map(([key, group]) => `
       <section class="group">
         ${showHeads ? head(key, group) : ''}
